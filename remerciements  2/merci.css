@@ -1,0 +1,134 @@
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --cream:#FAF6F0;--warm:#EDE4D6;--blush:#E8C4B0;
+  --terra:#C47A5A;--deep:#9B4F3F;--sage:#8A9E85;
+  --forest:#4A6741;--ink:#2C2420;--mist:#7A6E68;
+  --gold:#C9A96E;--gold-lt:#E8D5B0;
+}
+body{background:var(--cream);font-family:'DM Sans',sans-serif;color:var(--ink);min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 20px}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pop{0%{transform:scale(0)}60%{transform:scale(1.2)}100%{transform:scale(1)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes confetti-fall{
+  0%{transform:translateY(-20px) rotate(0deg);opacity:1}
+  100%{transform:translateY(100vh) rotate(720deg);opacity:0}
+}
+
+/* CONFETTI */
+.confetti-piece{
+  position:fixed;width:10px;height:10px;border-radius:2px;
+  animation:confetti-fall linear forwards;pointer-events:none;z-index:0;
+}
+
+.container{
+  max-width:600px;width:100%;text-align:center;
+  animation:fadeUp .6s ease;position:relative;z-index:1;
+}
+
+/* BADGE SUCCÈS */
+.success-badge{
+  width:96px;height:96px;border-radius:50%;
+  background:linear-gradient(135deg,var(--sage),var(--forest));
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 32px;font-size:44px;
+  box-shadow:0 16px 48px rgba(74,103,65,.3);
+  animation:pop .6s cubic-bezier(.34,1.56,.64,1) .2s both, float 4s ease-in-out 1s infinite;
+}
+
+.logo{
+  font-family:'Cormorant Garamond',serif;font-size:16px;
+  color:var(--mist);margin-bottom:32px;
+  letter-spacing:.04em;
+}
+.logo em{font-style:italic;color:var(--terra)}
+
+h1{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(36px,6vw,54px);font-weight:300;
+  line-height:1.1;margin-bottom:16px;color:var(--ink);
+}
+h1 em{font-style:italic;color:var(--terra)}
+
+.subtitle{
+  font-size:15px;font-weight:300;color:var(--mist);
+  line-height:1.75;max-width:480px;margin:0 auto 40px;
+}
+.subtitle strong{color:var(--ink);font-weight:500}
+
+/* ÉTAPES */
+.steps-card{
+  background:#fff;border-radius:24px;padding:36px;
+  box-shadow:0 6px 40px rgba(44,36,32,.08);
+  margin-bottom:32px;text-align:left;
+}
+.steps-title{
+  font-size:11px;font-weight:700;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--terra);
+  display:flex;align-items:center;gap:10px;
+  margin-bottom:28px;
+}
+.steps-title::before,.steps-title::after{content:'';flex:1;height:1px;background:var(--gold-lt)}
+
+.step-item{
+  display:flex;gap:16px;align-items:flex-start;
+  padding:16px 0;border-bottom:1px solid var(--gold-lt);
+}
+.step-item:last-child{border-bottom:none;padding-bottom:0}
+.step-num{
+  width:32px;height:32px;border-radius:50%;
+  background:linear-gradient(135deg,var(--terra),var(--deep));
+  color:#fff;display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:700;flex-shrink:0;margin-top:2px;
+}
+.step-content h4{font-size:14px;font-weight:600;margin-bottom:4px}
+.step-content p{font-size:13px;color:var(--mist);line-height:1.6}
+.step-content a{color:var(--terra);font-weight:500}
+
+/* BOUTON PRINCIPAL */
+.btn-main{
+  display:inline-block;
+  background:linear-gradient(135deg,var(--terra),var(--deep));
+  color:#fff;border:none;
+  padding:20px 52px;border-radius:50px;
+  font-family:'DM Sans',sans-serif;
+  font-size:15px;font-weight:700;letter-spacing:.06em;
+  cursor:pointer;transition:all .3s;
+  box-shadow:0 12px 40px rgba(196,122,90,.4);
+  text-decoration:none;
+  margin-bottom:16px;
+  width:100%;
+  text-align:center;
+}
+.btn-main:hover{transform:translateY(-3px);box-shadow:0 20px 52px rgba(155,79,63,.45)}
+
+.btn-secondary{
+  display:inline-block;
+  background:var(--warm);color:var(--mist);border:none;
+  padding:14px 32px;border-radius:50px;
+  font-family:'DM Sans',sans-serif;
+  font-size:13px;font-weight:500;
+  cursor:pointer;transition:all .25s;
+  text-decoration:none;width:100%;text-align:center;
+}
+.btn-secondary:hover{background:var(--gold-lt);color:var(--deep)}
+
+/* INFOS BOX */
+.info-box{
+  background:var(--gold-lt);border-radius:16px;
+  padding:18px 22px;font-size:13px;color:var(--deep);
+  line-height:1.7;margin-top:20px;text-align:left;
+}
+.info-box strong{font-weight:600}
+
+/* FOOTER */
+.page-footer{
+  margin-top:48px;font-size:12px;color:var(--mist);
+  line-height:1.7;
+}
+.page-footer a{color:var(--terra);text-decoration:none}
+
+@media(max-width:480px){
+  .steps-card{padding:24px}
+  h1{font-size:34px}
+}
