@@ -2,15 +2,8 @@
   functions = "netlify/functions"
   publish = "."
 
-# Root → landing
+# Racine → landing
 [[redirects]]
   from = "/"
   to = "/landing"
   status = 302
-
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
-  force = false
-  conditions = {Role = ["public"]}

@@ -31,26 +31,80 @@ exports.handler = async (event) => {
     const customerEmail = session.customer_details.email;
     const customerName = session.customer_details.name || customerEmail.split('@')[0];
 
-    console.log('Paiement réussi pour:', customerEmail);
+    console.log('🎉 Paiement réussi pour:', customerEmail);
+
+    const results = {
+      payment: true,
+      auth0: false,
+      email: false,
+      password: null,
+      errors: []
+    };
 
     try {
       // 1. Générer un mot de passe aléatoire
       const password = generatePassword();
+      results.password = password;
 
       // 2. Créer l'utilisateur dans Auth0
-      const userId = await createAuth0User(customerEmail, password, customerName);
-      console.log('Utilisateur créé dans Auth0:', userId);
+      try {
+        const userId = await createAuth0User(customerEmail, password, customerName);
+        results.auth0 = true;
+        console.log('✅ Utilisateur créé dans Auth0:', userId);
+      } catch (error) {
+        results.errors.push({ step: 'auth0', error: error.message });
+        console.error('❌ Erreur Auth0:', error.message);
+        
+        // Si l'utilisateur existe déjà, ce n'est pas grave
+        if (error.message.includes('already exists') || error.response?.data?.message?.includes('already exists')) {
+          console.log('ℹ️  Utilisateur existe déjà dans Auth0');
+          results.auth0 = true; // Considérer comme un succès
+        }
+      }
 
       // 3. Envoyer l'email avec SendGrid
-      await sendCredentialsEmail(customerEmail, customerName, customerEmail, password);
-      console.log('Email envoyé à:', customerEmail);
+      try {
+        await sendCredentialsEmail(customerEmail, customerName, customerEmail, password);
+        results.email = true;
+        console.log('✅ Email envoyé à:', customerEmail);
+      } catch (error) {
+        results.errors.push({ step: 'sendgrid', error: error.message });
+        console.error('❌ Erreur SendGrid:', error.message);
+        console.error('⚠️  ACTION REQUISE : Envoi manuel requis pour', customerEmail);
+        console.error('   Email:', customerEmail, '| Mot de passe:', password);
+      }
 
-      return {
-        statusCode: 200,
-        body: JSON.stringify({ message: 'User created and email sent' })
-      };
+      // Log du résumé
+      console.log('📊 Résumé:', {
+        email: customerEmail,
+        auth0: results.auth0 ? '✅' : '❌',
+        emailSent: results.email ? '✅' : '❌'
+      });
+
+      // Retourner 200 si au moins Auth0 a fonctionné
+      // Stripe ne réessaiera pas le webhook
+      if (results.auth0) {
+        return {
+          statusCode: 200,
+          body: JSON.stringify({ 
+            message: 'Payment processed',
+            results: results
+          })
+        };
+      } else {
+        // Seulement retourner 500 si Auth0 a échoué
+        // Stripe réessaiera le webhook
+        return {
+          statusCode: 500,
+          body: JSON.stringify({ 
+            error: 'Auth0 creation failed',
+            details: results.errors
+          })
+        };
+      }
+      
     } catch (error) {
-      console.error('Erreur lors du traitement:', error);
+      console.error('❌ Erreur critique:', error);
       return {
         statusCode: 500,
         body: JSON.stringify({ error: error.message })
@@ -130,7 +184,7 @@ async function sendCredentialsEmail(toEmail, toName, login, password) {
     to: toEmail,
     from: process.env.EMAIL_FROM,
     subject: 'Vos identifiants d\'accès - Paiement confirmé',
-    text: `Bonjour ${toName},\n\nVotre paiement a été confirmé avec succès !\n\nVoici vos identifiants de connexion :\n\nEmail : ${login}\nMot de passe : ${password}\n\nConnectez-vous sur : ${process.env.URL}/login/\n\nCordialement,\nL'équipe`,
+    text: `Bonjour ${toName},\n\nVotre paiement a été confirmé avec succès !\n\nVoici vos identifiants de connexion :\n\nEmail : ${login}\nMot de passe : ${password}\n\nConnectez-vous sur : ${process.env.ROOT_URL}/login/\n\nCordialement,\nL'équipe`,
     html: `
       <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
         <h2 style="color: #D4917D;">Bienvenue !</h2>
@@ -143,7 +197,7 @@ async function sendCredentialsEmail(toEmail, toName, login, password) {
           <p><strong>Mot de passe :</strong> <code style="background: white; padding: 4px 8px; border-radius: 4px;">${password}</code></p>
         </div>
         
-        <a href="${process.env.URL}/login/" 
+        <a href="${process.env.ROOT_URL}/login/" 
            style="display: inline-block; background: linear-gradient(135deg, #D4917D 0%, #C97D68 100%); 
                   color: white; padding: 14px 28px; text-decoration: none; border-radius: 8px; 
                   font-weight: 600; margin: 20px 0;">

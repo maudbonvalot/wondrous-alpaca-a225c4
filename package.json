@@ -2,6 +2,11 @@
   "name": "wondrous-alpaca",
   "version": "1.0.0",
   "description": "Site de paiement avec authentification",
+  "scripts": {
+    "dev": "netlify dev",
+    "test:webhook": "stripe trigger checkout.session.completed",
+    "test:listen": "stripe listen --forward-to http://localhost:8888/.netlify/functions/send_credentials --events checkout.session.completed"
+  },
   "dependencies": {
     "stripe": "^14.0.0",
     "axios": "^1.6.0",
