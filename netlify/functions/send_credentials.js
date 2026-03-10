@@ -7,26 +7,59 @@ exports.handler = async (event) => {
     return { statusCode: 405, body: 'Method Not Allowed' };
   }
 
-  const sig = event.headers['stripe-signature'];
+  // Netlify normalise les headers en minuscules
+  const sig = event.headers['stripe-signature'] || event.headers['Stripe-Signature'];
   const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
+
+  if (!sig) {
+    console.error('❌ Aucune signature Stripe trouvée dans les headers');
+    return { statusCode: 400, body: 'No Stripe signature found' };
+  }
+
+  if (!webhookSecret) {
+    console.error('❌ STRIPE_WEBHOOK_SECRET non configuré');
+    return { statusCode: 500, body: 'Webhook secret not configured' };
+  }
 
   let stripeEvent;
 
   try {
     // Vérifier la signature du webhook
+    // event.body est déjà une string brute dans Netlify Functions
     stripeEvent = stripe.webhooks.constructEvent(
       event.body,
       sig,
       webhookSecret
     );
   } catch (err) {
-    console.error('Webhook signature verification failed:', err.message);
+    console.error('❌ Webhook signature verification failed:', err.message);
+    console.error('   Headers reçus:', JSON.stringify(event.headers));
+    console.error('   Body length:', event.body?.length);
     return { statusCode: 400, body: `Webhook Error: ${err.message}` };
   }
 
-  // Traiter l'événement checkout.session.completed
   if (stripeEvent.type === 'checkout.session.completed') {
     const session = stripeEvent.data.object;
+    
+    const lineItems = await stripe.checkout.sessions.listLineItems(session.id, { limit: 10 });
+    
+    const targetProductId = process.env.STRIPE_PRODUCT_ID;
+    
+    const hasTargetProduct = lineItems.data.some(item => {
+      const priceId = item.price?.id;
+      return item.price?.product === targetProductId;
+    });
+    
+    if (!hasTargetProduct) {
+      console.log('ℹ️  Paiement ignoré - produit différent de "Reset Métabolique"');
+      console.log('   Produit(s) acheté(s):', lineItems.data.map(i => i.description).join(', '));
+      return {
+        statusCode: 200,
+        body: JSON.stringify({ message: 'Payment ignored - different product' })
+      };
+    }
+    
+    console.log('✅ Produit "Reset Métabolique" détecté - traitement en cours');
     
     const customerEmail = session.customer_details.email;
     const customerName = session.customer_details.name || customerEmail.split('@')[0];
