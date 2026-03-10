@@ -8,7 +8,7 @@ async function authenticateWithPassword(email, password) {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      grant_type: 'password',
+      grant_type: 'http://auth0.com/oauth/grant-type/password-realm',
       username: email,
       password: password,
       client_id: window.AUTH0_CONFIG.clientId,
