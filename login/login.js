@@ -1,33 +1,37 @@
 // login.js - Gestion de la connexion avec Auth0
 
-let auth0Client = null;
-
-// Initialiser Auth0
-async function initAuth0() {
-  auth0Client = await auth0.createAuth0Client({
-    domain: window.AUTH0_CONFIG.domain,
-    clientId: window.AUTH0_CONFIG.clientId,
-    authorizationParams: {
-      redirect_uri: window.location.origin + '/protected/'
-    }
+// Authentifier avec Auth0 via Resource Owner Password Grant
+async function authenticateWithPassword(email, password) {
+  const response = await fetch(`https://${window.AUTH0_CONFIG.domain}/oauth/token`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      grant_type: 'password',
+      username: email,
+      password: password,
+      client_id: window.AUTH0_CONFIG.clientId,
+      audience: `https://${window.AUTH0_CONFIG.domain}/api/v2/`,
+      scope: 'openid profile email'
+    })
   });
 
-  // Vérifier si l'utilisateur revient après une authentification
-  const query = window.location.search;
-  if (query.includes('code=') && query.includes('state=')) {
-    await auth0Client.handleRedirectCallback();
-    window.history.replaceState({}, document.title, '/protected/');
+  if (!response.ok) {
+    const error = await response.json();
+    throw error;
   }
 
-  // Vérifier si déjà connecté
-  const isAuthenticated = await auth0Client.isAuthenticated();
-  if (isAuthenticated) {
-    window.location.href = '/protected/';
-  }
+  return await response.json();
 }
 
 document.addEventListener('DOMContentLoaded', async function() {
-  await initAuth0();
+  // Vérifier si déjà connecté (tokens présents dans sessionStorage)
+  const accessToken = sessionStorage.getItem('access_token');
+  if (accessToken) {
+    window.location.href = '/protected/';
+    return;
+  }
 
   const loginForm = document.getElementById('loginForm');
   const loginButton = loginForm.querySelector('.login-button');
@@ -42,26 +46,27 @@ document.addEventListener('DOMContentLoaded', async function() {
     loginButton.disabled = true;
 
     try {
-      // Connexion avec email/password via Auth0
-      await auth0Client.loginWithCredentials({
-        username: email,
-        password: password,
-        realm: 'Username-Password-Authentication'
-      });
-
-      // Si succès, rediriger vers protected
+      // Authentifier avec Auth0
+      const tokens = await authenticateWithPassword(email, password);
+      
+      // Stocker les tokens
+      sessionStorage.setItem('access_token', tokens.access_token);
+      sessionStorage.setItem('id_token', tokens.id_token);
+      
+      // Rediriger vers protected
       window.location.href = '/protected/';
       
     } catch (error) {
       console.error('Erreur de connexion:', error);
       
-      // Afficher le message d'erreur
       let errorMessage = 'Erreur de connexion. Vérifiez vos identifiants.';
       
       if (error.error === 'invalid_grant') {
         errorMessage = 'Email ou mot de passe incorrect.';
       } else if (error.error === 'access_denied') {
         errorMessage = 'Accès refusé. Contactez le support.';
+      } else if (error.error === 'unauthorized') {
+        errorMessage = 'Configuration incorrecte. Contactez le support.';
       }
       
       alert(errorMessage);

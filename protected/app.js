@@ -403,3 +403,14 @@ function showPage(name) {
   document.getElementById('recette-modal').addEventListener('click', function(e) {
     if (e.target === this) closeRecette();
   });
+
+  // Fonction de déconnexion
+  function logout() {
+    // Supprimer les tokens du sessionStorage
+    sessionStorage.removeItem('access_token');
+    sessionStorage.removeItem('id_token');
+    sessionStorage.removeItem('user');
+    
+    // Rediriger vers la page de login
+    window.location.href = '/login/';
+  }
