@@ -12,7 +12,7 @@ async function authenticateWithPassword(email, password) {
       username: email,
       password: password,
       client_id: window.AUTH0_CONFIG.clientId,
-      audience: `https://${window.AUTH0_CONFIG.domain}/api/v2/`,
+      realm: 'Username-Password-Authentication',
       scope: 'openid profile email'
     })
   });
@@ -22,7 +22,9 @@ async function authenticateWithPassword(email, password) {
     throw error;
   }
 
-  return await response.json();
+  const tokens = await response.json();
+  console.log('✅ Tokens reçus:', tokens);
+  return tokens;
 }
 
 document.addEventListener('DOMContentLoaded', async function() {
@@ -65,8 +67,12 @@ document.addEventListener('DOMContentLoaded', async function() {
         errorMessage = 'Email ou mot de passe incorrect.';
       } else if (error.error === 'access_denied') {
         errorMessage = 'Accès refusé. Contactez le support.';
+      } else if (error.error === 'unauthorized_client') {
+        errorMessage = '❌ Grant type "Password" non activé dans Auth0.\nAllez dans Auth0 Dashboard → Applications → Settings → Advanced Settings → Grant Types → Cochez "Password"';
       } else if (error.error === 'unauthorized') {
         errorMessage = 'Configuration incorrecte. Contactez le support.';
+      } else if (error.error_description) {
+        errorMessage = `Erreur Auth0: ${error.error_description}`;
       }
       
       alert(errorMessage);
