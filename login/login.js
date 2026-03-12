@@ -1,19 +1,15 @@
 // login.js - Gestion de la connexion avec Auth0
 
-// Authentifier avec Auth0 via Resource Owner Password Grant
+// Authentifier via la fonction backend Netlify (sécurisé)
 async function authenticateWithPassword(email, password) {
-  const response = await fetch(`https://${window.AUTH0_CONFIG.domain}/oauth/token`, {
+  const response = await fetch('/.netlify/functions/auth_login', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      grant_type: 'http://auth0.com/oauth/grant-type/password-realm',
-      username: email,
-      password: password,
-      client_id: window.AUTH0_CONFIG.clientId,
-      realm: 'Username-Password-Authentication',
-      scope: 'openid profile email'
+      email: email,
+      password: password
     })
   });
 
@@ -63,16 +59,16 @@ document.addEventListener('DOMContentLoaded', async function() {
       
       let errorMessage = 'Erreur de connexion. Vérifiez vos identifiants.';
       
-      if (error.error === 'invalid_grant') {
+      if (error.error === 'invalid_grant' || error.error === 'invalid_user_password') {
         errorMessage = 'Email ou mot de passe incorrect.';
       } else if (error.error === 'access_denied') {
-        errorMessage = 'Accès refusé. Contactez le support.';
+        errorMessage = 'Accès refusé. Vérifiez que votre compte est bien activé.';
       } else if (error.error === 'unauthorized_client') {
-        errorMessage = '❌ Grant type "Password" non activé dans Auth0.\nAllez dans Auth0 Dashboard → Applications → Settings → Advanced Settings → Grant Types → Cochez "Password"';
-      } else if (error.error === 'unauthorized') {
-        errorMessage = 'Configuration incorrecte. Contactez le support.';
+        errorMessage = 'Configuration Auth0 incorrecte. Contactez le support.';
+      } else if (error.error === 'server_error') {
+        errorMessage = 'Erreur serveur. Réessayez dans quelques instants.';
       } else if (error.error_description) {
-        errorMessage = `Erreur Auth0: ${error.error_description}`;
+        errorMessage = `Erreur: ${error.error_description}`;
       }
       
       alert(errorMessage);
