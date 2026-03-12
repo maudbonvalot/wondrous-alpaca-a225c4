@@ -3,7 +3,7 @@
  */
 (async function protectPage() {
   // Configuration Auth0 (domaine public)
-  const AUTH0_DOMAIN = 'dev-ui7y38rv7dxqr48x.eu.auth0.com';
+  const AUTH_DOMAIN = 'dev-ui7y38rv7dxqr48x.eu.auth0.com';
   
   // Récupérer les tokens depuis sessionStorage
   const accessToken = sessionStorage.getItem('access_token');
@@ -17,7 +17,7 @@
 
   try {
     // Vérifier la validité du token en récupérant les infos utilisateur
-    const response = await fetch(`https://${AUTH0_DOMAIN}/userinfo`, {
+    const response = await fetch(`https://${AUTH_DOMAIN}/userinfo`, {
       headers: {
         'Authorization': `Bearer ${accessToken}`
       }
