@@ -40,7 +40,7 @@ exports.handler = async (event) => {
       };
     }
 
-    const auth0Domain = process.env.AUTH0_DOMAIN;
+    const auth0Domain = 'dev-ui7y38rv7dxqr48x.eu.auth0.com';
     const clientId = process.env.AUTH0_M2M_CLIENT_ID;
     const clientSecret = process.env.AUTH0_M2M_CLIENT_SECRET;
 

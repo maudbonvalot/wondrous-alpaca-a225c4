@@ -161,7 +161,7 @@ function generatePassword() {
 
 // Obtenir un token Management API Auth0
 async function getAuth0ManagementToken() {
-  const auth0Domain = process.env.AUTH0_DOMAIN;
+  const auth0Domain = 'dev-ui7y38rv7dxqr48x.eu.auth0.com';
   const clientId = process.env.AUTH0_M2M_CLIENT_ID;
   const clientSecret = process.env.AUTH0_M2M_CLIENT_SECRET;
 
@@ -183,7 +183,7 @@ async function getAuth0ManagementToken() {
 
 // Créer un utilisateur dans Auth0
 async function createAuth0User(email, password, name) {
-  const auth0Domain = process.env.AUTH0_DOMAIN;
+  const auth0Domain = 'dev-ui7y38rv7dxqr48x.eu.auth0.com';
   
   // Obtenir un nouveau token à chaque appel
   const managementToken = await getAuth0ManagementToken();
