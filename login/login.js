@@ -1,32 +1,5 @@
-// login.js - Gestion de la connexion avec Auth0
-
-// Authentifier via la fonction backend Netlify (sécurisé)
-async function authenticateWithPassword(email, password) {
-  const response = await fetch('/.netlify/functions/auth_login', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      email: email,
-      password: password
-    })
-  });
-
-  if (!response.ok) {
-    const error = await response.json();
-    throw error;
-  }
-
-  const tokens = await response.json();
-  console.log('✅ Tokens reçus:', tokens);
-  return tokens;
-}
-
 document.addEventListener('DOMContentLoaded', async function() {
-  // Vérifier si déjà connecté (tokens présents dans sessionStorage)
-  const accessToken = sessionStorage.getItem('access_token');
-  if (accessToken) {
+  if (localStorage.getItem('access_token')) {
     window.location.href = '/protected/';
     return;
   }
@@ -44,14 +17,23 @@ document.addEventListener('DOMContentLoaded', async function() {
     loginButton.disabled = true;
 
     try {
-      // Authentifier avec Auth0
-      const tokens = await authenticateWithPassword(email, password);
+      const response = await fetch('/.netlify/functions/auth_login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+      });
+
+      if (!response.ok) {
+        const error = await response.json();
+        throw error;
+      }
+
+      const tokens = await response.json();
       
-      // Stocker les tokens
-      sessionStorage.setItem('access_token', tokens.access_token);
-      sessionStorage.setItem('id_token', tokens.id_token);
+      localStorage.setItem('access_token', tokens.access_token);
+      localStorage.setItem('id_token', tokens.id_token);
       
-      // Rediriger vers protected
+      console.log('✅ Authentification réussie');
       window.location.href = '/protected/';
       
     } catch (error) {
@@ -62,19 +44,45 @@ document.addEventListener('DOMContentLoaded', async function() {
       if (error.error === 'invalid_grant' || error.error === 'invalid_user_password') {
         errorMessage = 'Email ou mot de passe incorrect.';
       } else if (error.error === 'access_denied') {
-        errorMessage = 'Accès refusé. Vérifiez que votre compte est bien activé.';
-      } else if (error.error === 'unauthorized_client') {
-        errorMessage = 'Configuration Auth0 incorrecte. Contactez le support.';
-      } else if (error.error === 'server_error') {
-        errorMessage = 'Erreur serveur. Réessayez dans quelques instants.';
+        errorMessage = 'Accès refusé.';
       } else if (error.error_description) {
-        errorMessage = `Erreur: ${error.error_description}`;
+        errorMessage = error.error_description;
       }
       
       alert(errorMessage);
       
       loginButton.textContent = 'Se connecter';
       loginButton.disabled = false;
+    }
+  });
+
+  const forgotPasswordLink = document.getElementById('forgotPasswordLink');
+  forgotPasswordLink.addEventListener('click', async function(e) {
+    e.preventDefault();
+    
+    const email = document.getElementById('email').value;
+    
+    if (!email) {
+      alert('Veuillez entrer votre email dans le champ ci-dessus.');
+      document.getElementById('email').focus();
+      return;
+    }
+    
+    if (!confirm(`Un email de réinitialisation sera envoyé à ${email}. Continuer ?`)) {
+      return;
+    }
+    
+    try {
+      await fetch('/.netlify/functions/auth_reset_password', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email })
+      });
+      
+      alert('✅ Si cet email existe, vous recevrez un lien de réinitialisation. Vérifiez vos spams.');
+    } catch (error) {
+      console.error('Erreur réinitialisation:', error);
+      alert('✅ Si cet email existe, vous recevrez un lien de réinitialisation.');
     }
   });
 });

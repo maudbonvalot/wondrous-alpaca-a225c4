@@ -406,10 +406,13 @@ function showPage(name) {
 
   // Fonction de déconnexion
   function logout() {
-    // Supprimer les tokens du sessionStorage
-    sessionStorage.removeItem('access_token');
-    sessionStorage.removeItem('id_token');
-    sessionStorage.removeItem('user');
+    // Supprimer les tokens du localStorage
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('id_token');
+    localStorage.removeItem('expires_at');
+    localStorage.removeItem('user');
+    
+    console.log('✅ Déconnexion réussie');
     
     // Rediriger vers la page de login
     window.location.href = '/login/';
