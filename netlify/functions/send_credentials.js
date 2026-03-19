@@ -116,7 +116,7 @@ async function createAuth0User(email, password, name) {
  * Ajoute un contact dans SendGrid Marketing List spécifique
  * Déclenche automatiquement l'automation associée à la liste
  */
-async function addToMarketingList(email, name, customData = {}) {
+async function addToMarketingList(email, name) {
   try {
     const firstName = name.split(' ')[0] || name;
     const lastName = name.split(' ').slice(1).join(' ') || '';
@@ -126,11 +126,7 @@ async function addToMarketingList(email, name, customData = {}) {
         {
           email: email,
           first_name: firstName,
-          last_name: lastName,
-          custom_fields: {
-            // Custom fields pour segmentation et automation
-            ...customData
-          }
+          last_name: lastName
         }
       ]
     };
@@ -354,11 +350,7 @@ exports.handler = async (event) => {
 
       // 4. Ajouter le contact dans la LISTE MARKETING (déclenche l'automation)
       try {
-        const contactAdded = await addToMarketingList(customerEmail, customerName, {
-          credentials_sent: true,
-          date_achat: new Date().toISOString(),
-          produit: 'Reset Métabolique'
-        });
+        const contactAdded = await addToMarketingList(customerEmail, customerName);
         results.marketingContact = contactAdded;
       } catch (error) {
         results.errors.push({ step: 'marketing_contact', error: error.message });
