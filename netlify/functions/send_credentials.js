@@ -19,7 +19,7 @@ const CONFIG = {
   },
   sendgrid: {
     from: process.env.EMAIL_FROM,
-    adminEmail: 'tristanmonteiro97@gmail.com',
+    adminEmail: 'maud.glowcose@gmail.com',
     credentialsTemplateId: process.env.SENDGRID_TEMPLATE_CREDENTIALS,
     marketingListId: process.env.SENDGRID_MARKETING_LIST_ID
   },
