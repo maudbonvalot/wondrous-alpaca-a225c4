@@ -210,8 +210,8 @@ async function sendAdminNotification(customerEmail, customerName, results) {
         <ul style="list-style: none; padding: 0;">
           <li style="margin: 8px 0;">${statusEmoji(results.payment)} Paiement Stripe</li>
           <li style="margin: 8px 0;">${statusEmoji(results.auth0)} Création compte Auth0</li>
-          <li style="margin: 8px 0;">${statusEmoji(results.sendgridContact)} Ajout contact SendGrid</li>
-          <li style="margin: 8px 0;">${statusEmoji(results.email)} Envoi email credentials</li>
+          <li style="margin: 8px 0;">${statusEmoji(results.transactionalEmail)} Envoi email credentials</li>
+          <li style="margin: 8px 0;">${statusEmoji(results.marketingContact)} Ajout liste marketing</li>
         </ul>
         
         ${results.errors.length > 0 ? `
@@ -220,12 +220,6 @@ async function sendAdminNotification(customerEmail, customerName, results) {
             <ul>
               ${results.errors.map(e => `<li><strong>${e.step}:</strong> ${e.error}</li>`).join('')}
             </ul>
-          </div>
-        ` : ''}
-        
-        ${results.password ? `
-          <div style="background: #e3f2fd; padding: 16px; border-radius: 8px; margin: 16px 0;">
-            <p><strong>🔑 Mot de passe généré :</strong> <code style="background: white; padding: 4px 8px; border-radius: 4px;">${results.password}</code></p>
           </div>
         ` : ''}
       </div>
