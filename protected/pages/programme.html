@@ -1,0 +1,335 @@
+<div id="page-programme" class="page">
+  <div class="section-header">
+    <span class="section-tag">Module 1 & 2</span>
+    <h2>Nutrition & <em>Métabolisme</em></h2>
+    <p>Tes menus semaine par semaine, construits pour travailler avec tes hormones, pas contre elles.</p>
+  </div>
+
+  <div class="module-grid">
+    <div class="module-sidebar">
+      <div class="sidebar-item active" onclick="showContent('intro')">
+        <h5>🧠 Comprendre</h5>
+        <p>Bases & principes</p>
+      </div>
+      <div class="sidebar-item" onclick="showContent('sem1')">
+        <h5>Semaine 1</h5>
+        <p>Purge & Reset</p>
+      </div>
+      <div class="sidebar-item" onclick="showContent('sem2')">
+        <h5>Semaine 2</h5>
+        <p>Reconstruction</p>
+      </div>
+      <div class="sidebar-item" onclick="showContent('sem3')">
+        <h5>Semaine 3</h5>
+        <p>Optimisation</p>
+      </div>
+      <div class="sidebar-item" onclick="showContent('sem4')">
+        <h5>Semaine 4</h5>
+        <p>Ancrage</p>
+      </div>
+      <div class="sidebar-item" onclick="showContent('proteines')">
+        <h5>💪 Protéines</h5>
+        <p>Atteindre 100g/jour</p>
+      </div>
+      <div class="sidebar-item" onclick="showContent('regles')">
+        <h5>✦ 10 Règles d'or</h5>
+        <p>Les fondamentaux</p>
+      </div>
+    </div>
+
+    <div class="module-content">
+
+      <!-- INTRO -->
+      <div class="content-block active" id="content-intro">
+        <h3>Comprendre ton métabolisme</h3>
+        <p class="content-intro">Entre 30 et 50 ans, ton corps change. Les œstrogènes fluctuent, le cortisol monte plus vite, la résistance à l'insuline s'installe. Ce n'est pas une fatalité — c'est une information. Ce programme est conçu pour travailler <em>avec</em> ces changements.</p>
+        <div class="info-cards">
+          <div class="info-card">
+            <div class="info-card-icon">⚡</div>
+            <h4>Cortisol & Stress</h4>
+            <p>Le cortisol élevé favorise le stockage abdominal. La nutrition anti-inflammatoire et le timing des repas aident à le réguler naturellement.</p>
+          </div>
+          <div class="info-card sage">
+            <div class="info-card-icon">🌿</div>
+            <h4>Insuline & Glycémie</h4>
+            <p>Stabiliser la glycémie avec des protéines à chaque repas et des féculents le midi réduit les fringales et le stockage de graisses.</p>
+          </div>
+          <div class="info-card gold">
+            <div class="info-card-icon">🌸</div>
+            <h4>Œstrogènes & Foie</h4>
+            <p>Le foie est l'organe clé du métabolisme hormonal. Des aliments comme les crucifères (brocoli, chou) l'aident à éliminer l'excès d'œstrogènes.</p>
+          </div>
+          <div class="info-card forest">
+            <div class="info-card-icon">💎</div>
+            <h4>Thyroïde & Minéraux</h4>
+            <p>Le zinc (graines de courge, œufs) et le magnésium (légumes verts, chocolat 85%) sont essentiels pour une thyroïde efficace.</p>
+          </div>
+        </div>
+
+        <div style="background: white; border-radius: 16px; padding: 24px; box-shadow: 0 2px 16px rgba(44,36,32,0.05);">
+          <h4 style="font-family: Cormorant Garamond; font-size: 22px; margin-bottom: 16px;">Les 3 piliers de ce reset</h4>
+          <ul class="checklist" id="piliers">
+            <li onclick="toggleCheck(this)"><div class="check-box">✓</div><span class="check-text">Protéines à chaque repas (min. 25-30g) pour soutenir la masse musculaire et le métabolisme</span></li>
+            <li onclick="toggleCheck(this)"><div class="check-box">✓</div><span class="check-text">Féculents complexes le midi uniquement — patate douce, quinoa, riz basmati complet</span></li>
+            <li onclick="toggleCheck(this)"><div class="check-box">✓</div><span class="check-text">Anti-inflammatoires quotidiens — oméga-3, curcuma, gingembre, fruits rouges</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- SEMAINE 1 -->
+      <div class="content-block" id="content-sem1">
+        <h3>Semaine 1 — Purge & Remise à zéro</h3>
+        <p class="content-intro">Objectif : éliminer les aliments pro-inflammatoires, stabiliser la glycémie et préparer ton corps à absorber les nutriments. Supprime sucres ajoutés, alcool et plats transformés cette semaine.</p>
+
+        <div class="week-tabs">
+          <button class="week-tab active" onclick="showDay(this, 'j1')">Lun</button>
+          <button class="week-tab" onclick="showDay(this, 'j2')">Mar</button>
+          <button class="week-tab" onclick="showDay(this, 'j3')">Mer</button>
+          <button class="week-tab" onclick="showDay(this, 'j4')">Jeu</button>
+          <button class="week-tab" onclick="showDay(this, 'j5')">Ven</button>
+          <button class="week-tab" onclick="showDay(this, 'j6')">Sam</button>
+          <button class="week-tab" onclick="showDay(this, 'j7')">Dim</button>
+        </div>
+
+        <div class="week-content active" id="j1">
+          <div class="meal-detail">
+            <h4>☀️ Lundi — Jour 1</h4>
+            <div class="meal-row">
+              <span class="meal-label">Petit-déj</span>
+              <span class="meal-text">Bol protéiné : Skyr 150g + fruits rouges 100g + graines de chia 1 c.s. + flocons d'avoine 60g</span>
+            </div>
+            <div class="meal-row">
+              <span class="meal-label lunch">Déjeuner</span>
+              <span class="meal-text">Poulet grillé 150g + patate douce rôtie 150g + légumes verts vapeur 200g + 1 c.s. huile d'olive</span>
+            </div>
+            <div class="meal-row">
+              <span class="meal-label snack">Collation</span>
+              <span class="meal-text">2 œufs durs + une poignée de fruits rouges</span>
+            </div>
+            <div class="meal-row">
+              <span class="meal-label dinner">Dîner</span>
+              <span class="meal-text">Saumon en papillote 130g + épinards sautés à l'ail + graines de lin 1 c.s.</span>
+            </div>
+            <div class="macro-bar">
+              <div class="macro-item"><span class="macro-value">102g</span><span class="macro-label">Protéines</span></div>
+              <div class="macro-item"><span class="macro-value">48g</span><span class="macro-label">Lipides</span></div>
+              <div class="macro-item"><span class="macro-value">135g</span><span class="macro-label">Glucides</span></div>
+              <div class="macro-item"><span class="macro-value">~1700</span><span class="macro-label">Kcal</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="week-content" id="j2">
+          <div class="meal-detail">
+            <h4>☀️ Mardi — Jour 2</h4>
+            <div class="meal-row"><span class="meal-label">Petit-déj</span><span class="meal-text">Omelette 2 œufs + épinards sautés + 1 c.s. huile d'olive + thé vert</span></div>
+            <div class="meal-row"><span class="meal-label lunch">Déjeuner</span><span class="meal-text">Bowl quinoa 80g + thon au naturel 130g + avocat ½ + crudités + jus de citron</span></div>
+            <div class="meal-row"><span class="meal-label snack">Collation</span><span class="meal-text">Fromage blanc 0% 150g + 1 c.s. graines</span></div>
+            <div class="meal-row"><span class="meal-label dinner">Dîner</span><span class="meal-text">Soupe lentilles corail + curcuma + gingembre frais + légumes verts</span></div>
+            <div class="macro-bar">
+              <div class="macro-item"><span class="macro-value">98g</span><span class="macro-label">Protéines</span></div>
+              <div class="macro-item"><span class="macro-value">42g</span><span class="macro-label">Lipides</span></div>
+              <div class="macro-item"><span class="macro-value">128g</span><span class="macro-label">Glucides</span></div>
+              <div class="macro-item"><span class="macro-value">~1620</span><span class="macro-label">Kcal</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="week-content" id="j3">
+          <div class="meal-detail">
+            <h4>☀️ Mercredi — Jour 3</h4>
+            <div class="meal-row"><span class="meal-label">Petit-déj</span><span class="meal-text">Porridge avoine 60g + lait végétal non sucré + fruits rouges + graines de courge</span></div>
+            <div class="meal-row"><span class="meal-label lunch">Déjeuner</span><span class="meal-text">Dinde grillée 150g + riz basmati complet 70g + haricots verts vapeur + moutarde</span></div>
+            <div class="meal-row"><span class="meal-label snack">Collation</span><span class="meal-text">Skyr 150g + 1 pomme</span></div>
+            <div class="meal-row"><span class="meal-label dinner">Dîner</span><span class="meal-text">Poêlée d'œufs 2 + courgettes + avocat ½ tranché + herbes fraîches</span></div>
+            <div class="macro-bar">
+              <div class="macro-item"><span class="macro-value">105g</span><span class="macro-label">Protéines</span></div>
+              <div class="macro-item"><span class="macro-value">44g</span><span class="macro-label">Lipides</span></div>
+              <div class="macro-item"><span class="macro-value">140g</span><span class="macro-label">Glucides</span></div>
+              <div class="macro-item"><span class="macro-value">~1740</span><span class="macro-label">Kcal</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="week-content" id="j4">
+          <div class="meal-detail">
+            <h4>☀️ Jeudi — Jour 4</h4>
+            <div class="meal-row"><span class="meal-label">Petit-déj</span><span class="meal-text">Skyr 150g + fruits rouges + 1 c.s. graines de lin + café ou thé</span></div>
+            <div class="meal-row"><span class="meal-label lunch">Déjeuner</span><span class="meal-text">Saumon pavé 130g + patate douce 150g + brocoli vapeur + huile d'olive</span></div>
+            <div class="meal-row"><span class="meal-label snack">Collation</span><span class="meal-text">2 œufs durs + poignée fruits rouges</span></div>
+            <div class="meal-row"><span class="meal-label dinner">Dîner</span><span class="meal-text">Pois chiches rôtis four 100g + salade épinards + graines + vinaigrette citron-olive</span></div>
+            <div class="macro-bar">
+              <div class="macro-item"><span class="macro-value">100g</span><span class="macro-label">Protéines</span></div>
+              <div class="macro-item"><span class="macro-value">46g</span><span class="macro-label">Lipides</span></div>
+              <div class="macro-item"><span class="macro-value">130g</span><span class="macro-label">Glucides</span></div>
+              <div class="macro-item"><span class="macro-value">~1680</span><span class="macro-label">Kcal</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="week-content" id="j5">
+          <div class="meal-detail">
+            <h4>☀️ Vendredi — Jour 5</h4>
+            <div class="meal-row"><span class="meal-label">Petit-déj</span><span class="meal-text">Omelette 2 œufs + champignons + épinards + 1 tranche de pain complet</span></div>
+            <div class="meal-row"><span class="meal-label lunch">Déjeuner</span><span class="meal-text">Poulet 150g + quinoa 80g + légumes grillés (poivron, courgette) + huile d'olive</span></div>
+            <div class="meal-row"><span class="meal-label snack">Collation</span><span class="meal-text">Fromage blanc 150g + graines de chia + 1 c.c. miel</span></div>
+            <div class="meal-row"><span class="meal-label dinner">Dîner</span><span class="meal-text">Thon au naturel 130g + salade verte + avocat ½ + citron + herbes</span></div>
+            <div class="macro-bar">
+              <div class="macro-item"><span class="macro-value">108g</span><span class="macro-label">Protéines</span></div>
+              <div class="macro-item"><span class="macro-value">40g</span><span class="macro-label">Lipides</span></div>
+              <div class="macro-item"><span class="macro-value">125g</span><span class="macro-label">Glucides</span></div>
+              <div class="macro-item"><span class="macro-value">~1660</span><span class="macro-label">Kcal</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="week-content" id="j6">
+          <div class="meal-detail">
+            <h4>🌿 Samedi — Jour 6 (Repas plaisir)</h4>
+            <div class="meal-row"><span class="meal-label">Petit-déj</span><span class="meal-text">Pancakes sarrasin 2-3 + fruits rouges + skyr à la place de la crème</span></div>
+            <div class="meal-row"><span class="meal-label lunch">Déjeuner</span><span class="meal-text">Restaurant OK ! Choisis protéines + légumes. Évite les sauces lourdes et les desserts sucrés.</span></div>
+            <div class="meal-row"><span class="meal-label dinner">Dîner</span><span class="meal-text">Soupe maison légumes + protéine de ton choix + 1 carré chocolat 85%</span></div>
+            <div class="macro-bar">
+              <div class="macro-item"><span class="macro-value">~85g</span><span class="macro-label">Protéines</span></div>
+              <div class="macro-item"><span class="macro-value">~50g</span><span class="macro-label">Lipides</span></div>
+              <div class="macro-item"><span class="macro-value">~150g</span><span class="macro-label">Glucides</span></div>
+              <div class="macro-item"><span class="macro-value">~1750</span><span class="macro-label">Kcal</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="week-content" id="j7">
+          <div class="meal-detail">
+            <h4>🌸 Dimanche — Jour 7 (Bilan & Préparation)</h4>
+            <div class="meal-row"><span class="meal-label">Petit-déj</span><span class="meal-text">Brunch protéiné : œufs brouillés 3 + saumon fumé + pain complet + avocat</span></div>
+            <div class="meal-row"><span class="meal-label lunch">Déjeuner</span><span class="meal-text">Batch cooking : prépare tes protéines et légumes pour la semaine 2</span></div>
+            <div class="meal-row"><span class="meal-label dinner">Dîner</span><span class="meal-text">Soupe de lentilles corail + gingembre + curcuma + pain complet</span></div>
+            <div style="background: var(--gold-light); border-radius: 12px; padding: 16px 20px; margin-top: 16px; font-size: 13px; color: var(--deep-rose);">
+              ✨ Bilan semaine 1 : Note ton niveau d'énergie, ta digestion et ton sommeil dans le tracker. Ces 3 indicateurs sont plus fiables que la balance !
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SEMAINE 2 -->
+      <div class="content-block" id="content-sem2">
+        <h3>Semaine 2 — Reconstruction & Énergie</h3>
+        <p class="content-intro">Tu as posé les bases. Maintenant on nourrit le foie — l'organe clé du métabolisme hormonal féminin — et on monte en puissance sur les protéines. Mange tes féculents le midi, protéines et légumes le soir.</p>
+        <div class="info-cards">
+          <div class="info-card">
+            <div class="info-card-icon">🥩</div>
+            <h4>Priorité protéines</h4>
+            <p>Vise 30-35g de protéines au déjeuner cette semaine. Le poulet, le saumon et le thon sont tes meilleurs alliés pour la reconstruction musculaire.</p>
+          </div>
+          <div class="info-card sage">
+            <div class="info-card-icon">🌿</div>
+            <h4>Nourrir le foie</h4>
+            <p>Crucifères (brocoli, chou), citron le matin à jeun, tisane de chardon-Marie. Ces aliments boostent la détox hormonale naturelle.</p>
+          </div>
+          <div class="info-card gold">
+            <div class="info-card-icon">⏰</div>
+            <h4>Timing des repas</h4>
+            <p>Mange toutes les 4-5h. Pas de jeûne prolongé cette semaine — il élèverait le cortisol et freinerait la reconstruction métabolique.</p>
+          </div>
+        </div>
+        <div style="background: white; border-radius: 16px; padding: 24px; box-shadow: 0 2px 16px rgba(44,36,32,0.05);">
+          <h4 style="font-family: Cormorant Garamond; font-size: 22px; margin-bottom: 16px;">Menu type Semaine 2</h4>
+          <div class="meal-row"><span class="meal-label">Petit-déj</span><span class="meal-text">Omelette 2 œufs + épinards sautés + 1 c.s. huile d'olive + thé vert</span></div>
+          <div class="meal-row"><span class="meal-label lunch">Déjeuner</span><span class="meal-text">Bowl quinoa 80g + thon 130g + avocat ½ + crudités + citron</span></div>
+          <div class="meal-row"><span class="meal-label snack">Collation</span><span class="meal-text">Skyr 150g + graines de courge</span></div>
+          <div class="meal-row"><span class="meal-label dinner">Dîner</span><span class="meal-text">Soupe lentilles corail + curcuma + gingembre + légumes verts</span></div>
+        </div>
+      </div>
+
+      <!-- SEMAINE 3 -->
+      <div class="content-block" id="content-sem3">
+        <h3>Semaine 3 — Optimisation & Hormones</h3>
+        <p class="content-intro">On entre dans le cœur du programme. Focus sur la progestérone, la thyroïde et la réduction de l'inflammation systémique. Les résultats commencent à se voir sur l'énergie et le sommeil.</p>
+        <div class="info-cards">
+          <div class="info-card">
+            <div class="info-card-icon">💎</div>
+            <h4>Zinc & Thyroïde</h4>
+            <p>Graines de courge, œufs, viandes. Le zinc est indispensable à la conversion T4 → T3 (hormone thyroïdienne active).</p>
+          </div>
+          <div class="info-card sage">
+            <div class="info-card-icon">🍫</div>
+            <h4>Magnésium & Stress</h4>
+            <p>Légumes verts, chocolat 85%, graines. Le magnésium régule le cortisol et améliore la qualité du sommeil profond.</p>
+          </div>
+          <div class="info-card forest">
+            <div class="info-card-icon">🐟</div>
+            <h4>Oméga-3 & Inflammation</h4>
+            <p>Saumon, sardines, graines de lin. Les oméga-3 réduisent l'inflammation et soutiennent la production de progestérone.</p>
+          </div>
+        </div>
+        <div style="background: white; border-radius: 16px; padding: 24px; box-shadow: 0 2px 16px rgba(44,36,32,0.05);">
+          <h4 style="font-family: Cormorant Garamond; font-size: 22px; margin-bottom: 16px;">Menu type Semaine 3</h4>
+          <div class="meal-row"><span class="meal-label">Petit-déj</span><span class="meal-text">Porridge avoine 60g + lait végétal + fruits rouges + graines de lin</span></div>
+          <div class="meal-row"><span class="meal-label lunch">Déjeuner</span><span class="meal-text">Poulet ou saumon + riz basmati complet 70g + brocoli vapeur + huile d'olive</span></div>
+          <div class="meal-row"><span class="meal-label snack">Collation</span><span class="meal-text">2 carrés chocolat 85% + quelques graines de courge</span></div>
+          <div class="meal-row"><span class="meal-label dinner">Dîner</span><span class="meal-text">Poêlée œufs 2 + légumes verts + avocat ½ tranché</span></div>
+        </div>
+      </div>
+
+      <!-- SEMAINE 4 -->
+      <div class="content-block" id="content-sem4">
+        <h3>Semaine 4 — Ancrage & Nouveau Rythme</h3>
+        <p class="content-intro">La dernière semaine n'est pas une fin — c'est le début de ton nouveau rythme. On stabilise les acquis et on crée des habitudes durables, sans rebond.</p>
+        <div class="info-cards">
+          <div class="info-card gold">
+            <div class="info-card-icon">🎯</div>
+            <h4>Ton bilan S4</h4>
+            <p>Note ton énergie (sur 10), ton sommeil, ta digestion et ton niveau de stress. Ces 4 indicateurs montrent ton reset réel, bien au-delà de la balance.</p>
+          </div>
+          <div class="info-card sage">
+            <div class="info-card-icon">🔄</div>
+            <h4>L'habitude durable</h4>
+            <p>80/20 : 80% de l'alimentation reste dans le programme, 20% de flexibilité. C'est le ratio qui permet de tenir sur le long terme.</p>
+          </div>
+        </div>
+        <div style="background: white; border-radius: 16px; padding: 24px; box-shadow: 0 2px 16px rgba(44,36,32,0.05);">
+          <h4 style="font-family: Cormorant Garamond; font-size: 22px; margin-bottom: 16px;">Menu type Semaine 4</h4>
+          <div class="meal-row"><span class="meal-label">Petit-déj</span><span class="meal-text">Skyr 150g + graines de chia + fruits rouges + 1 carré chocolat noir</span></div>
+          <div class="meal-row"><span class="meal-label lunch">Déjeuner</span><span class="meal-text">Pois chiches rôtis 100g + patate douce 150g + salade + huile d'olive</span></div>
+          <div class="meal-row"><span class="meal-label snack">Collation</span><span class="meal-text">Fromage blanc + graines</span></div>
+          <div class="meal-row"><span class="meal-label dinner">Dîner</span><span class="meal-text">Saumon 130g + courgettes + quinoa 80g en petite quantité</span></div>
+        </div>
+      </div>
+
+      <!-- PROTEINES -->
+      <div class="content-block" id="content-proteines">
+        <h3>Atteindre 100g de protéines/jour</h3>
+        <p class="content-intro">100g de protéines par jour, c'est LE levier numéro 1 pour relancer ton métabolisme. Voici comment y arriver facilement, sans te forcer.</p>
+        <div class="info-cards">
+          <div class="info-card"><div class="info-card-icon">🌅</div><h4>Matin : ~20-25g</h4><p>Skyr 150g = 17g • Œufs ×2 = 14g • Omelette + skyr = 28g</p></div>
+          <div class="info-card sage"><div class="info-card-icon">☀️</div><h4>Midi : ~35g</h4><p>Poulet 150g = 35g • Saumon 130g = 25g • Thon 130g = 28g</p></div>
+          <div class="info-card gold"><div class="info-card-icon">🌙</div><h4>Soir : ~25g</h4><p>Saumon 130g = 25g • Thon 130g = 28g • Œufs ×2 + fromage blanc = 30g</p></div>
+          <div class="info-card forest"><div class="info-card-icon">🍎</div><h4>Collation : ~17g</h4><p>Fromage blanc 0% 150g = 17g • Skyr = 15g</p></div>
+        </div>
+        <div style="background: linear-gradient(135deg, var(--warm-white), #F0E8DF); border-radius: 16px; padding: 24px; text-align: center;">
+          <p style="font-family: Cormorant Garamond; font-size: 28px; color: var(--deep-rose);">Total moyen : <strong>95–110g</strong> ✓</p>
+          <p style="font-size: 13px; color: var(--warm-gray); margin-top: 8px;">Tu es dans la cible sans te forcer, simplement en distribuant bien tes protéines sur la journée.</p>
+        </div>
+      </div>
+
+      <!-- REGLES -->
+      <div class="content-block" id="content-regles">
+        <h3>Les 10 règles d'or</h3>
+        <p class="content-intro">Ces principes sont les fondations du programme. Lis-les, intègre-les, reviens-y si tu te perds.</p>
+        <div class="tips-grid">
+          <div class="tip-card"><div class="tip-number">01</div><h4>Protéines à chaque repas</h4><p>Minimum 25-30g par repas. C'est non négociable pour le métabolisme et la satiété.</p></div>
+          <div class="tip-card"><div class="tip-number">02</div><h4>Ne saute jamais le petit-déjeuner</h4><p>Le cortisol matinal est déjà élevé. Manger dans l'heure du réveil le régule.</p></div>
+          <div class="tip-card"><div class="tip-number">03</div><h4>Féculents le midi</h4><p>Patate douce, quinoa, riz le midi. Le soir : légumes + protéines uniquement.</p></div>
+          <div class="tip-card"><div class="tip-number">04</div><h4>2L d'eau minimum</h4><p>La déshydratation ralentit le métabolisme de 3%. Eau + tisanes comptent.</p></div>
+          <div class="tip-card"><div class="tip-number">05</div><h4>Pas de régime hypocalorique</h4><p>En périménopause, manger trop peu casse le métabolisme. Nourris-toi bien.</p></div>
+          <div class="tip-card"><div class="tip-number">06</div><h4>Mange toutes les 4-5h</h4><p>Pour éviter les pics de cortisol et stabiliser la glycémie.</p></div>
+          <div class="tip-card"><div class="tip-number">07</div><h4>Dors 7-8h</h4><p>Le sommeil régule ghreline, leptine et insuline. Sans sommeil, pas de résultats.</p></div>
+          <div class="tip-card"><div class="tip-number">08</div><h4>Café avant 14h</h4><p>Après 14h, la caféine perturbe le cortisol et le cycle hormonal.</p></div>
+          <div class="tip-card"><div class="tip-number">09</div><h4>Mange dans le calme</h4><p>Le stress active le mode stockage des graisses. 20 min assis sans écran.</p></div>
+          <div class="tip-card"><div class="tip-number">10</div><h4>La régularité prime</h4><p>Ce n'est pas un régime, c'est une réinitialisation. 80% de rigueur suffit.</p></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

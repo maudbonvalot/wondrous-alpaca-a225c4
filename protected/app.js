@@ -1,10 +1,21 @@
-function showPage(name) {
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    document.querySelectorAll('.nav-links button').forEach(b => b.classList.remove('active'));
-    document.getElementById('page-' + name).classList.add('active');
-    document.getElementById('nav-' + name).classList.add('active');
-    window.scrollTo(0, 0);
+async function showPage(name) {
+  // Charger la page si pas encore chargée
+  if (!PageLoader.loadedPages.has(name)) {
+    await PageLoader.loadPage(name);
   }
+  
+  // Afficher/masquer
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-links button').forEach(b => b.classList.remove('active'));
+  
+  const targetPage = document.getElementById(`page-${name}`);
+  const targetNav = document.getElementById(`nav-${name}`);
+  
+  if (targetPage) targetPage.classList.add('active');
+  if (targetNav) targetNav.classList.add('active');
+  
+  window.scrollTo(0, 0);
+}
 
   function showContent(id) {
     document.querySelectorAll('.content-block').forEach(b => b.classList.remove('active'));
@@ -406,14 +417,32 @@ function showPage(name) {
 
   // Fonction de déconnexion
   function logout() {
-    // Supprimer les tokens du localStorage
     localStorage.removeItem('access_token');
     localStorage.removeItem('id_token');
     localStorage.removeItem('expires_at');
     localStorage.removeItem('user');
     
     console.log('✅ Déconnexion réussie');
-    
-    // Rediriger vers la page de login
     window.location.href = '/login/';
   }
+
+  // Toggle mobile menu
+  function toggleMobileMenu() {
+    const navLinks = document.getElementById('navLinks');
+    const navToggle = document.querySelector('.nav-toggle');
+    
+    navLinks.classList.toggle('active');
+    navToggle.classList.toggle('active');
+  }
+
+  // Close mobile menu when clicking on a nav item
+  document.querySelectorAll('.nav-links button').forEach(button => {
+    button.addEventListener('click', () => {
+      if (window.innerWidth <= 968) {
+        const navLinks = document.getElementById('navLinks');
+        const navToggle = document.querySelector('.nav-toggle');
+        navLinks.classList.remove('active');
+        navToggle.classList.remove('active');
+      }
+    });
+  });

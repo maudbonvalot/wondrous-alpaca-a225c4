@@ -1,0 +1,172 @@
+<div id="page-tracker" class="page">
+  <div class="section-header">
+    <span class="section-tag">Suivi Quotidien</span>
+    <h2>Mon <em>Tracker</em></h2>
+    <p>Note tes ressentis chaque jour. C'est plus fiable que la balance pour mesurer ton reset.</p>
+  </div>
+
+  <div style="max-width: 900px; margin: 0 auto; padding: 0 40px 60px;">
+    <div class="progress-header">
+      <div style="flex: 1;">
+        <div class="progress-label">Progression du programme</div>
+        <div class="progress-bar-wrap">
+          <div class="progress-bar-fill" id="prog-bar" style="width: 0%"></div>
+        </div>
+      </div>
+      <div class="progress-pct" id="prog-pct">0%</div>
+    </div>
+
+    <!-- Eau -->
+    <div class="tracker-grid">
+      <div class="tracker-card">
+        <h5>💧 Eau aujourd'hui</h5>
+        <div class="tracker-dots" id="eau-dots">
+          <div class="dot" onclick="toggleDot(this, 'eau')">1</div>
+          <div class="dot" onclick="toggleDot(this, 'eau')">2</div>
+          <div class="dot" onclick="toggleDot(this, 'eau')">3</div>
+          <div class="dot" onclick="toggleDot(this, 'eau')">4</div>
+          <div class="dot" onclick="toggleDot(this, 'eau')">5</div>
+          <div class="dot" onclick="toggleDot(this, 'eau')">6</div>
+          <div class="dot" onclick="toggleDot(this, 'eau')">7</div>
+          <div class="dot" onclick="toggleDot(this, 'eau')">8</div>
+        </div>
+        <div class="tracker-progress" id="eau-count">0 / 8 verres</div>
+      </div>
+
+      <div class="tracker-card">
+        <h5>🥩 Repas avec protéines</h5>
+        <div class="tracker-dots" id="repas-dots">
+          <div class="dot" onclick="toggleDot(this, 'repas')" style="width: 36px; border-radius: 8px; font-size: 9px;">PD</div>
+          <div class="dot" onclick="toggleDot(this, 'repas')" style="width: 36px; border-radius: 8px; font-size: 9px;">DJ</div>
+          <div class="dot" onclick="toggleDot(this, 'repas')" style="width: 36px; border-radius: 8px; font-size: 9px;">CN</div>
+          <div class="dot" onclick="toggleDot(this, 'repas')" style="width: 36px; border-radius: 8px; font-size: 9px;">DN</div>
+        </div>
+        <div class="tracker-progress" id="repas-count">0 / 4 repas</div>
+      </div>
+
+      <div class="tracker-card">
+        <h5>🏃‍♀️ Activité physique</h5>
+        <div class="tracker-dots" id="sport-dots">
+          <div class="dot" onclick="toggleDot(this, 'sport')" style="width: 36px; border-radius: 8px; font-size: 9px;">Lun</div>
+          <div class="dot" onclick="toggleDot(this, 'sport')" style="width: 36px; border-radius: 8px; font-size: 9px;">Mar</div>
+          <div class="dot" onclick="toggleDot(this, 'sport')" style="width: 36px; border-radius: 8px; font-size: 9px;">Mer</div>
+          <div class="dot" onclick="toggleDot(this, 'sport')" style="width: 36px; border-radius: 8px; font-size: 9px;">Jeu</div>
+          <div class="dot" onclick="toggleDot(this, 'sport')" style="width: 36px; border-radius: 8px; font-size: 9px;">Ven</div>
+        </div>
+        <div class="tracker-progress" id="sport-count">0 / 5 jours</div>
+      </div>
+
+      <div class="tracker-card">
+        <h5>😴 Sommeil</h5>
+        <div class="rating-row" style="flex-direction: column; align-items: flex-start; gap: 6px; margin-top: 4px;">
+          <div class="rating-stars" id="sommeil-stars">
+            <span class="star" onclick="setRating('sommeil', 1)">🌙</span>
+            <span class="star" onclick="setRating('sommeil', 2)">🌙</span>
+            <span class="star" onclick="setRating('sommeil', 3)">🌙</span>
+            <span class="star" onclick="setRating('sommeil', 4)">🌙</span>
+            <span class="star" onclick="setRating('sommeil', 5)">🌙</span>
+          </div>
+          <span style="font-size: 11px; color: var(--warm-gray);" id="sommeil-label">Non renseigné</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Énergie & Digestion -->
+    <div style="background: white; border-radius: 16px; padding: 28px; box-shadow: 0 2px 16px rgba(44,36,32,0.05); margin-bottom: 20px;">
+      <h4 style="font-size: 15px; font-weight: 600; margin-bottom: 20px; color: var(--charcoal);">Comment tu te sens aujourd'hui ?</h4>
+      <div class="rating-row">
+        <span class="rating-label">⚡ Énergie</span>
+        <div class="rating-stars" id="energie-stars">
+          <span class="star" onclick="setRating('energie', 1)">⭐</span>
+          <span class="star" onclick="setRating('energie', 2)">⭐</span>
+          <span class="star" onclick="setRating('energie', 3)">⭐</span>
+          <span class="star" onclick="setRating('energie', 4)">⭐</span>
+          <span class="star" onclick="setRating('energie', 5)">⭐</span>
+        </div>
+      </div>
+      <div class="rating-row">
+        <span class="rating-label">🌸 Humeur</span>
+        <div class="rating-stars" id="humeur-stars">
+          <span class="star" onclick="setRating('humeur', 1)">⭐</span>
+          <span class="star" onclick="setRating('humeur', 2)">⭐</span>
+          <span class="star" onclick="setRating('humeur', 3)">⭐</span>
+          <span class="star" onclick="setRating('humeur', 4)">⭐</span>
+          <span class="star" onclick="setRating('humeur', 5)">⭐</span>
+        </div>
+      </div>
+      <div class="rating-row">
+        <span class="rating-label">🌿 Digestion</span>
+        <div class="rating-stars" id="digestion-stars">
+          <span class="star" onclick="setRating('digestion', 1)">⭐</span>
+          <span class="star" onclick="setRating('digestion', 2)">⭐</span>
+          <span class="star" onclick="setRating('digestion', 3)">⭐</span>
+          <span class="star" onclick="setRating('digestion', 4)">⭐</span>
+          <span class="star" onclick="setRating('digestion', 5)">⭐</span>
+        </div>
+      </div>
+      <div class="rating-row">
+        <span class="rating-label">😰 Stress</span>
+        <div class="rating-stars" id="stress-stars">
+          <span class="star" onclick="setRating('stress', 1)">⭐</span>
+          <span class="star" onclick="setRating('stress', 2)">⭐</span>
+          <span class="star" onclick="setRating('stress', 3)">⭐</span>
+          <span class="star" onclick="setRating('stress', 4)">⭐</span>
+          <span class="star" onclick="setRating('stress', 5)">⭐</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Symptômes -->
+    <div style="background: white; border-radius: 16px; padding: 28px; box-shadow: 0 2px 16px rgba(44,36,32,0.05); margin-bottom: 20px;">
+      <h4 style="font-size: 15px; font-weight: 600; margin-bottom: 16px; color: var(--charcoal);">Symptômes du jour (sélectionne ce que tu ressens)</h4>
+      <div class="symptom-grid">
+        <button class="symptom-btn" onclick="toggleSymptom(this)">💤 Fatigue</button>
+        <button class="symptom-btn" onclick="toggleSymptom(this)">🌊 Ballonnements</button>
+        <button class="symptom-btn" onclick="toggleSymptom(this)">🍫 Fringales sucre</button>
+        <button class="symptom-btn" onclick="toggleSymptom(this)">🥵 Bouffées de chaleur</button>
+        <button class="symptom-btn" onclick="toggleSymptom(this)">😤 Irritabilité</button>
+        <button class="symptom-btn" onclick="toggleSymptom(this)">🤕 Maux de tête</button>
+        <button class="symptom-btn" onclick="toggleSymptom(this)">💧 Rétention eau</button>
+        <button class="symptom-btn" onclick="toggleSymptom(this)">😴 Insomnie</button>
+        <button class="symptom-btn" onclick="toggleSymptom(this)">✨ Aucun symptôme</button>
+      </div>
+    </div>
+
+    <!-- Notes -->
+    <div style="background: white; border-radius: 16px; padding: 28px; box-shadow: 0 2px 16px rgba(44,36,32,0.05); margin-bottom: 20px;">
+      <h4 style="font-size: 15px; font-weight: 600; margin-bottom: 8px;">📝 Notes du jour</h4>
+      <p style="font-size: 12px; color: var(--warm-gray); margin-bottom: 8px;">Comment s'est passée ta journée ? Ce que tu as mangé de différent, ce que tu as ressenti...</p>
+      <textarea class="notes-area" rows="4" placeholder="Ex : Bonne énergie ce matin, légèrement fatiguée l'après-midi. J'ai eu une fringale vers 17h, j'aurais dû prendre ma collation plus tôt..."></textarea>
+    </div>
+
+    <!-- Activité physique -->
+    <div style="background: white; border-radius: 16px; padding: 28px; box-shadow: 0 2px 16px rgba(44,36,32,0.05); margin-bottom: 20px;">
+      <h4 style="font-size: 15px; font-weight: 600; margin-bottom: 16px;">💪 Activité physique cette semaine</h4>
+      <div class="activity-week">
+        <div class="activity-card" onclick="this.classList.toggle('done')">
+          <div class="act-emoji">🧘‍♀️</div>
+          <h5>Yoga / Stretching</h5>
+          <p>30–45 min</p>
+        </div>
+        <div class="activity-card" onclick="this.classList.toggle('done')">
+          <div class="act-emoji">🚶‍♀️</div>
+          <h5>Marche active</h5>
+          <p>30–60 min</p>
+        </div>
+        <div class="activity-card" onclick="this.classList.toggle('done')">
+          <div class="act-emoji">🏋️‍♀️</div>
+          <h5>Musculation</h5>
+          <p>40–50 min</p>
+        </div>
+        <div class="activity-card" onclick="this.classList.toggle('done')">
+          <div class="act-emoji">🏃‍♀️</div>
+          <h5>Cardio / HIIT</h5>
+          <p>20–30 min</p>
+        </div>
+      </div>
+    </div>
+
+    <button class="save-btn" onclick="saveTracker()">Sauvegarder ma journée</button>
+    <span class="saved-msg" id="saved-msg">✓ Journée enregistrée !</span>
+  </div>
+</div>

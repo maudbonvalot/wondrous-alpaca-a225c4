@@ -1,0 +1,232 @@
+<div id="page-cycle" class="page">
+  <div class="section-header">
+    <span class="section-tag">Module 3 & 4</span>
+    <h2>Cycle Menstruel & <em>Hormones</em></h2>
+    <p>Ton alimentation et ton activité physique selon ta phase hormonale. Travailler avec ton cycle change tout.</p>
+  </div>
+
+  <div style="max-width: 900px; margin: 0 auto; padding: 0 40px 60px;">
+    <div class="phase-selector">
+      <button class="phase-btn active" onclick="showPhase(this, 'menstruelle')">
+        <span class="phase-emoji">🌑</span>
+        <span class="phase-name">Menstruelle</span>
+        <span class="phase-days">Jours 1–5</span>
+      </button>
+      <button class="phase-btn" onclick="showPhase(this, 'folliculaire')">
+        <span class="phase-emoji">🌱</span>
+        <span class="phase-name">Folliculaire</span>
+        <span class="phase-days">Jours 6–13</span>
+      </button>
+      <button class="phase-btn" onclick="showPhase(this, 'ovulatoire')">
+        <span class="phase-emoji">🌕</span>
+        <span class="phase-name">Ovulatoire</span>
+        <span class="phase-days">Jours 14–17</span>
+      </button>
+      <button class="phase-btn" onclick="showPhase(this, 'luteale')">
+        <span class="phase-emoji">🌘</span>
+        <span class="phase-name">Lutéale</span>
+        <span class="phase-days">Jours 18–28</span>
+      </button>
+    </div>
+
+    <!-- PHASE MENSTRUELLE -->
+    <div class="phase-detail active" id="phase-menstruelle">
+      <h4>🌑 Phase Menstruelle</h4>
+      <span class="phase-tag" style="background: #FDE8E8; color: #9B4F4F;">Jours 1–5 · Œstrogènes & Progestérone bas</span>
+      <p style="font-size: 14px; color: var(--warm-gray); line-height: 1.7; margin-top: 8px;">C'est ta phase de repos et de régénération. Ton corps perd du fer et du magnésium. Ne force rien — nourris-toi chaudement et richement.</p>
+      <div class="phase-two-col">
+        <div class="phase-col">
+          <h5>🍽️ Aliments prioritaires</h5>
+          <ul>
+            <li>Viandes rouges / foie (fer héminique)</li>
+            <li>Légumineuses (fer non-héminique + vitamine C)</li>
+            <li>Chocolat noir 85% (magnésium)</li>
+            <li>Gingembre & curcuma (anti-douleur naturel)</li>
+            <li>Bouillons de légumes chauds</li>
+            <li>Patate douce, betterave</li>
+          </ul>
+        </div>
+        <div class="phase-col">
+          <h5>💪 Activité physique</h5>
+          <ul>
+            <li>Yoga doux & stretching</li>
+            <li>Marche lente 20-30 min</li>
+            <li>Évite les HIIT et la musculation lourde</li>
+            <li>Bains chauds avec sel d'Epsom</li>
+            <li>Pilates léger si énergie</li>
+          </ul>
+        </div>
+        <div class="phase-col">
+          <h5>⚠️ À éviter</h5>
+          <ul>
+            <li>Café en excès (aggrave les crampes)</li>
+            <li>Alcool (épuise le magnésium)</li>
+            <li>Sucre raffiné (inflammation)</li>
+            <li>Entraînements intenses</li>
+          </ul>
+        </div>
+        <div class="phase-col">
+          <h5>🌿 Suppléments utiles</h5>
+          <ul>
+            <li>Magnésium bisglycinate (soir)</li>
+            <li>Oméga-3 (anti-inflammatoire)</li>
+            <li>Vitamine C avec les repas (absorption du fer)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- PHASE FOLLICULAIRE -->
+    <div class="phase-detail" id="phase-folliculaire">
+      <h4>🌱 Phase Folliculaire</h4>
+      <span class="phase-tag" style="background: #FFF0E0; color: #9B7040;">Jours 6–13 · Œstrogènes en hausse</span>
+      <p style="font-size: 14px; color: var(--warm-gray); line-height: 1.7; margin-top: 8px;">Ton énergie remonte progressivement. Les œstrogènes augmentent — tu brûles mieux les glucides. C'est le moment de te challenger en sport et d'augmenter légèrement les féculents.</p>
+      <div class="phase-two-col">
+        <div class="phase-col">
+          <h5>🍽️ Aliments prioritaires</h5>
+          <ul>
+            <li>Graines de lin & citrouille (phytoœstrogènes équilibrants)</li>
+            <li>Œufs (cholestérol = base des hormones)</li>
+            <li>Légumes fermentés (microbiote)</li>
+            <li>Quinoa, avoine (énergie durable)</li>
+            <li>Fruits frais variés</li>
+          </ul>
+        </div>
+        <div class="phase-col">
+          <h5>💪 Activité physique</h5>
+          <ul>
+            <li>Cardio modéré : course, vélo</li>
+            <li>Musculation full body</li>
+            <li>Nouvelles activités, sports de groupe</li>
+            <li>HIIT léger 1-2x/semaine</li>
+            <li>Tu récupères vite : profites-en !</li>
+          </ul>
+        </div>
+        <div class="phase-col">
+          <h5>⚡ Énergie & Humeur</h5>
+          <ul>
+            <li>Clarté mentale accrue</li>
+            <li>Sociabilité haute</li>
+            <li>Bonne tolérance à l'effort</li>
+            <li>Idéal pour les défis et la nouveauté</li>
+          </ul>
+        </div>
+        <div class="phase-col">
+          <h5>🌿 Suppléments utiles</h5>
+          <ul>
+            <li>Probiotiques (santé du microbiote)</li>
+            <li>Vitamine D (soutien hormonal)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- PHASE OVULATOIRE -->
+    <div class="phase-detail" id="phase-ovulatoire">
+      <h4>🌕 Phase Ovulatoire</h4>
+      <span class="phase-tag" style="background: #E8F5E8; color: #4A6741;">Jours 14–17 · Pic d'œstrogènes & LH</span>
+      <p style="font-size: 14px; color: var(--warm-gray); line-height: 1.7; margin-top: 8px;">Ton pic énergétique. Tu es au sommet de ta forme physique et mentale. C'est la fenêtre idéale pour les efforts intenses, les défis sportifs et les repas sociaux.</p>
+      <div class="phase-two-col">
+        <div class="phase-col">
+          <h5>🍽️ Aliments prioritaires</h5>
+          <ul>
+            <li>Légumes crucifères (brocoli, chou) — détox œstrogènes</li>
+            <li>Graines de tournesol & sésame</li>
+            <li>Aliments riches en zinc (huîtres, graines)</li>
+            <li>Repas légers et anti-inflammatoires</li>
+            <li>Smoothies verts (épinard + fruit)</li>
+          </ul>
+        </div>
+        <div class="phase-col">
+          <h5>💪 Activité physique</h5>
+          <ul>
+            <li>HIIT intense</li>
+            <li>Musculation lourde : c'est le moment !</li>
+            <li>Sports compétitifs</li>
+            <li>Longues randonnées</li>
+            <li>Ta récupération est optimale</li>
+          </ul>
+        </div>
+        <div class="phase-col">
+          <h5>⚡ Énergie & Humeur</h5>
+          <ul>
+            <li>Confiance et charisme au max</li>
+            <li>Communication facilitée</li>
+            <li>Libido haute</li>
+            <li>Idéal pour les présentations, RDV importants</li>
+          </ul>
+        </div>
+        <div class="phase-col">
+          <h5>⚠️ Vigilance</h5>
+          <ul>
+            <li>Ne te sur-engage pas (excès d'énergie)</li>
+            <li>Attention à la rétention d'eau légère</li>
+            <li>Hydratation ++ en sport intense</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- PHASE LUTEALE -->
+    <div class="phase-detail" id="phase-luteale">
+      <h4>🌘 Phase Lutéale</h4>
+      <span class="phase-tag" style="background: #EDE8F5; color: #6B5B9E;">Jours 18–28 · Progestérone haute, œstrogènes baissent</span>
+      <p style="font-size: 14px; color: var(--warm-gray); line-height: 1.7; margin-top: 8px;">La phase la plus exigeante nutritionnellement. Ton métabolisme accélère légèrement (+100-300 kcal), les fringales augmentent et le SPM peut apparaître. Anticipe plutôt que subir.</p>
+      <div class="phase-two-col">
+        <div class="phase-col">
+          <h5>🍽️ Aliments prioritaires</h5>
+          <ul>
+            <li>Magnésium ++ (chocolat 85%, légumes verts)</li>
+            <li>Graines de sésame & tournesol</li>
+            <li>Légumineuses (stabilisent la glycémie)</li>
+            <li>Glucides complexes le soir OK cette semaine</li>
+            <li>Infusions de framboisier</li>
+          </ul>
+        </div>
+        <div class="phase-col">
+          <h5>💪 Activité physique</h5>
+          <ul>
+            <li>Yoga, Pilates, natation</li>
+            <li>Musculation modérée</li>
+            <li>Marche : excellent anti-SPM</li>
+            <li>Évite les HIIT en fin de phase</li>
+            <li>Écoute ton corps sans culpabilité</li>
+          </ul>
+        </div>
+        <div class="phase-col">
+          <h5>⚠️ SPM : gérer naturellement</h5>
+          <ul>
+            <li>Réduis sel et caféine (rétention d'eau)</li>
+            <li>Magnésium + vitamine B6 (humeur)</li>
+            <li>Évite l'alcool (aggrave tous les symptômes)</li>
+            <li>Maintiens les protéines pour la satiété</li>
+          </ul>
+        </div>
+        <div class="phase-col">
+          <h5>🌿 Suppléments utiles</h5>
+          <ul>
+            <li>Magnésium bisglycinate 300mg/soir</li>
+            <li>Vitamine B6 (progestérone naturelle)</li>
+            <li>Safran (humeur) si SPM sévère</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- NOTE PREMENOPAUSE -->
+    <div style="background: linear-gradient(135deg, #F5EEF8, #EDE8F5); border-radius: 20px; padding: 32px; margin-top: 32px;">
+      <h4 style="font-family: Cormorant Garamond; font-size: 26px; color: var(--charcoal); margin-bottom: 12px;">🌸 Périménopause : ce qui change</h4>
+      <p style="font-size: 13px; color: var(--warm-gray); line-height: 1.7; margin-bottom: 16px;">Entre 40 et 50 ans, les cycles peuvent devenir irréguliers. Les phases se raccourcissent ou s'allongent. Le programme reste valable — adapte simplement selon comment tu te sens plutôt qu'en comptant les jours.</p>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+        <div>
+          <p style="font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: #6B5B9E; margin-bottom: 8px;">Signes périménopause</p>
+          <p style="font-size: 13px; color: var(--charcoal); line-height: 1.6;">Cycles irréguliers · Sueurs nocturnes · Sécheresse · Irritabilité · Prise de poids abdominale · Fatigue inexpliquée</p>
+        </div>
+        <div>
+          <p style="font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--forest); margin-bottom: 8px;">Ce programme aide à</p>
+          <p style="font-size: 13px; color: var(--charcoal); line-height: 1.6;">Stabiliser l'insuline · Réduire l'inflammation · Soutenir la thyroïde · Maintenir la masse musculaire · Améliorer le sommeil</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,180 @@
+<div id="page-recettes" class="page">
+  <div class="section-header">
+    <span class="section-tag">Cuisine & Nutrition</span>
+    <h2>Recettes <em>Protéinées</em></h2>
+    <p>Des recettes savoureuses, riches en protéines et adaptées au reset métabolique féminin. Ajuste les quantités selon ton besoin.</p>
+  </div>
+
+  <div style="max-width: 1100px; margin: 0 auto; padding: 0 40px 80px;">
+
+    <!-- FILTRES CATÉGORIES -->
+    <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:32px; justify-content:center;">
+      <button class="recette-filter active" onclick="filterRecettes(this,'all')">✦ Toutes</button>
+      <button class="recette-filter" onclick="filterRecettes(this,'petitdej')">🌅 Petit-déjeuner</button>
+      <button class="recette-filter" onclick="filterRecettes(this,'dejeuner')">☀️ Déjeuner</button>
+      <button class="recette-filter" onclick="filterRecettes(this,'diner')">🌙 Dîner</button>
+      <button class="recette-filter" onclick="filterRecettes(this,'collation')">🍎 Collation</button>
+    </div>
+
+    <!-- TOGGLE PORTIONS -->
+    <div style="display:flex; align-items:center; justify-content:center; gap:0; margin-bottom:40px;">
+      <span style="font-size:13px; color:var(--warm-gray); margin-right:16px;">Portions :</span>
+      <div style="display:flex; background:white; border-radius:30px; border:1.5px solid var(--gold-light); overflow:hidden; box-shadow:0 2px 10px rgba(44,36,32,0.06);">
+        <button id="portion-1" class="portion-toggle active" onclick="setPortions(1)">1 portion</button>
+        <button id="portion-4" class="portion-toggle" onclick="setPortions(4)">4 portions</button>
+      </div>
+    </div>
+
+    <!-- GRILLE RECETTES -->
+    <div class="recettes-grid" id="recettes-grid">
+
+      <!-- RECETTE 1 : Bowl Protéiné Matin -->
+      <div class="recette-card" data-cat="petitdej">
+        <div class="recette-img" style="background: linear-gradient(135deg, #FDE8D8, #FBBF8A);">
+          <span style="font-size:52px;">🥣</span>
+          <div class="recette-time-badge">⏱ 5 min</div>
+        </div>
+        <div class="recette-body">
+          <div class="recette-cat-tag petitdej">🌅 Petit-déjeuner</div>
+          <h3 class="recette-title">Bowl Skyr Fruits Rouges</h3>
+          <p class="recette-desc">Le petit-déjeuner signature du programme — rapide, rassasiant, anti-inflammatoire. Lance ton métabolisme dès le matin.</p>
+          <div class="macros-bar">
+            <div class="macro-pill protein"><span class="macro-val" data-base="25" data-unit="g">25g</span><span class="macro-name">Protéines</span></div>
+            <div class="macro-pill carb"><span class="macro-val" data-base="38" data-unit="g">38g</span><span class="macro-name">Glucides</span></div>
+            <div class="macro-pill fat"><span class="macro-val" data-base="6" data-unit="g">6g</span><span class="macro-name">Lipides</span></div>
+            <div class="macro-pill kcal"><span class="macro-val" data-base="300" data-unit="">300</span><span class="macro-name">Kcal</span></div>
+          </div>
+          <button class="voir-recette-btn" onclick="openRecette('bowl-skyr')">Voir la recette →</button>
+        </div>
+      </div>
+
+      <!-- RECETTE 2 : Omelette épinards -->
+      <div class="recette-card" data-cat="petitdej">
+        <div class="recette-img" style="background: linear-gradient(135deg, #E8F5E8, #B5C9B0);">
+          <span style="font-size:52px;">🍳</span>
+          <div class="recette-time-badge">⏱ 8 min</div>
+        </div>
+        <div class="recette-body">
+          <div class="recette-cat-tag petitdej">🌅 Petit-déjeuner</div>
+          <h3 class="recette-title">Omelette Épinards & Feta</h3>
+          <p class="recette-desc">Une omelette roulée généreuse avec des épinards frais et une touche de feta. Zinc, magnésium et protéines complètes.</p>
+          <div class="macros-bar">
+            <div class="macro-pill protein"><span class="macro-val" data-base="22" data-unit="g">22g</span><span class="macro-name">Protéines</span></div>
+            <div class="macro-pill carb"><span class="macro-val" data-base="4" data-unit="g">4g</span><span class="macro-name">Glucides</span></div>
+            <div class="macro-pill fat"><span class="macro-val" data-base="18" data-unit="g">18g</span><span class="macro-name">Lipides</span></div>
+            <div class="macro-pill kcal"><span class="macro-val" data-base="260" data-unit="">260</span><span class="macro-name">Kcal</span></div>
+          </div>
+          <button class="voir-recette-btn" onclick="openRecette('omelette')">Voir la recette →</button>
+        </div>
+      </div>
+
+      <!-- RECETTE 3 : Saumon papillote -->
+      <div class="recette-card" data-cat="dejeuner diner">
+        <div class="recette-img" style="background: linear-gradient(135deg, #FFE8D8, #FFB38A);">
+          <span style="font-size:52px;">🐟</span>
+          <div class="recette-time-badge">⏱ 20 min</div>
+        </div>
+        <div class="recette-body">
+          <div class="recette-cat-tag dejeuner">☀️ Déjeuner / Dîner</div>
+          <h3 class="recette-title">Saumon Papillote Gingembre</h3>
+          <p class="recette-desc">Le classique du programme. Oméga-3, gingembre anti-inflammatoire et légumes en un seul plat. Zéro matière grasse ajoutée.</p>
+          <div class="macros-bar">
+            <div class="macro-pill protein"><span class="macro-val" data-base="34" data-unit="g">34g</span><span class="macro-name">Protéines</span></div>
+            <div class="macro-pill carb"><span class="macro-val" data-base="8" data-unit="g">8g</span><span class="macro-name">Glucides</span></div>
+            <div class="macro-pill fat"><span class="macro-val" data-base="14" data-unit="g">14g</span><span class="macro-name">Lipides</span></div>
+            <div class="macro-pill kcal"><span class="macro-val" data-base="290" data-unit="">290</span><span class="macro-name">Kcal</span></div>
+          </div>
+          <button class="voir-recette-btn" onclick="openRecette('saumon')">Voir la recette →</button>
+        </div>
+      </div>
+
+      <!-- RECETTE 4 : Bowl quinoa thon -->
+      <div class="recette-card" data-cat="dejeuner">
+        <div class="recette-img" style="background: linear-gradient(135deg, #EDE8F5, #C8B8E8);">
+          <span style="font-size:52px;">🥗</span>
+          <div class="recette-time-badge">⏱ 10 min</div>
+        </div>
+        <div class="recette-body">
+          <div class="recette-cat-tag dejeuner">☀️ Déjeuner</div>
+          <h3 class="recette-title">Bowl Quinoa Thon Avocat</h3>
+          <p class="recette-desc">Le bowl parfait pour la phase folliculaire. Quinoa complet + thon + avocat = la trinité glucides-protéines-bons gras.</p>
+          <div class="macros-bar">
+            <div class="macro-pill protein"><span class="macro-val" data-base="38" data-unit="g">38g</span><span class="macro-name">Protéines</span></div>
+            <div class="macro-pill carb"><span class="macro-val" data-base="42" data-unit="g">42g</span><span class="macro-name">Glucides</span></div>
+            <div class="macro-pill fat"><span class="macro-val" data-base="16" data-unit="g">16g</span><span class="macro-name">Lipides</span></div>
+            <div class="macro-pill kcal"><span class="macro-val" data-base="460" data-unit="">460</span><span class="macro-name">Kcal</span></div>
+          </div>
+          <button class="voir-recette-btn" onclick="openRecette('bowl-quinoa')">Voir la recette →</button>
+        </div>
+      </div>
+
+      <!-- RECETTE 5 : Poulet patate douce -->
+      <div class="recette-card" data-cat="dejeuner">
+        <div class="recette-img" style="background: linear-gradient(135deg, #FFF0D8, #FDDBA0);">
+          <span style="font-size:52px;">🍗</span>
+          <div class="recette-time-badge">⏱ 30 min</div>
+        </div>
+        <div class="recette-body">
+          <div class="recette-cat-tag dejeuner">☀️ Déjeuner</div>
+          <h3 class="recette-title">Poulet Grillé & Patate Douce Rôtie</h3>
+          <p class="recette-desc">Le repas du midi de base, optimisé. Marinade au curcuma et herbes, légumes vapeur. Repas de sportive anti-inflammatoire.</p>
+          <div class="macros-bar">
+            <div class="macro-pill protein"><span class="macro-val" data-base="42" data-unit="g">42g</span><span class="macro-name">Protéines</span></div>
+            <div class="macro-pill carb"><span class="macro-val" data-base="35" data-unit="g">35g</span><span class="macro-name">Glucides</span></div>
+            <div class="macro-pill fat"><span class="macro-val" data-base="8" data-unit="g">8g</span><span class="macro-name">Lipides</span></div>
+            <div class="macro-pill kcal"><span class="macro-val" data-base="380" data-unit="">380</span><span class="macro-name">Kcal</span></div>
+          </div>
+          <button class="voir-recette-btn" onclick="openRecette('poulet')">Voir la recette →</button>
+        </div>
+      </div>
+
+      <!-- RECETTE 6 : Soupe lentilles -->
+      <div class="recette-card" data-cat="diner">
+        <div class="recette-img" style="background: linear-gradient(135deg, #F5E8D8, #E8C8A0);">
+          <span style="font-size:52px;">🍲</span>
+          <div class="recette-time-badge">⏱ 25 min</div>
+        </div>
+        <div class="recette-body">
+          <div class="recette-cat-tag diner">🌙 Dîner</div>
+          <h3 class="recette-title">Soupe Lentilles Corail Curcuma</h3>
+          <p class="recette-desc">La soupe du soir par excellence pendant la phase menstruelle. Réconfortante, riche en fer, anti-inflammatoire et végétale.</p>
+          <div class="macros-bar">
+            <div class="macro-pill protein"><span class="macro-val" data-base="18" data-unit="g">18g</span><span class="macro-name">Protéines</span></div>
+            <div class="macro-pill carb"><span class="macro-val" data-base="48" data-unit="g">48g</span><span class="macro-name">Glucides</span></div>
+            <div class="macro-pill fat"><span class="macro-val" data-base="5" data-unit="g">5g</span><span class="macro-name">Lipides</span></div>
+            <div class="macro-pill kcal"><span class="macro-val" data-base="310" data-unit="">310</span><span class="macro-name">Kcal</span></div>
+          </div>
+          <button class="voir-recette-btn" onclick="openRecette('soupe')">Voir la recette →</button>
+        </div>
+      </div>
+
+      <!-- RECETTE 7 : Pois chiches rôtis -->
+      <div class="recette-card" data-cat="diner dejeuner">
+        <div class="recette-img" style="background: linear-gradient(135deg, #E8F0E8, #A8C8A0);">
+          <span style="font-size:52px;">🌿</span>
+          <div class="recette-time-badge">⏱ 35 min</div>
+        </div>
+        <div class="recette-body">
+          <div class="recette-cat-tag diner">🌙 Dîner / Déjeuner</div>
+          <h3 class="recette-title">Pois Chiches Rôtis & Salade Verte</h3>
+          <p class="recette-desc">Des pois chiches ultra-croustillants au four, servis sur une salade généreuse. Repas végétal complet, idéal phase lutéale.</p>
+          <div class="macros-bar">
+            <div class="macro-pill protein"><span class="macro-val" data-base="16" data-unit="g">16g</span><span class="macro-name">Protéines</span></div>
+            <div class="macro-pill carb"><span class="macro-val" data-base="40" data-unit="g">40g</span><span class="macro-name">Glucides</span></div>
+            <div class="macro-pill fat"><span class="macro-val" data-base="12" data-unit="g">12g</span><span class="macro-name">Lipides</span></div>
+            <div class="macro-pill kcal"><span class="macro-val" data-base="330" data-unit="">330</span><span class="macro-name">Kcal</span></div>
+          </div>
+          <button class="voir-recette-btn" onclick="openRecette('pois-chiches')">Voir la recette →</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div id="recette-modal" style="display:none; position:fixed; inset:0; z-index:200; background:rgba(44,36,32,0.55); backdrop-filter:blur(4px); align-items:center; justify-content:center;">
+  <div id="modal-inner" style="background:var(--warm-white); border-radius:24px; max-width:640px; width:92%; max-height:88vh; overflow-y:auto; position:relative; box-shadow:0 24px 80px rgba(44,36,32,0.25);">
+    <button onclick="closeRecette()" style="position:sticky; top:16px; float:right; margin:16px 16px 0 0; background:var(--gold-light); border:none; border-radius:50%; width:36px; height:36px; font-size:18px; cursor:pointer; color:var(--deep-rose);">✕</button>
+    <div id="modal-content" style="padding:36px;"></div>
+  </div>
+</div>

@@ -1,0 +1,83 @@
+<div id="page-courses" class="page">
+  <div class="section-header">
+    <span class="section-tag">Module 5</span>
+    <h2>Liste de <em>Courses</em></h2>
+    <p>Tout ce dont tu as besoin pour une semaine complète du programme. Coche au fur et à mesure !</p>
+  </div>
+
+  <div style="max-width: 900px; margin: 0 auto; padding: 0 40px 60px;">
+    <div style="background: var(--gold-light); border-radius: 16px; padding: 18px 24px; margin-bottom: 24px; display: flex; align-items: center; gap: 12px;">
+      <span style="font-size: 20px;">💡</span>
+      <p style="font-size: 13px; color: var(--deep-rose); line-height: 1.5;">Budget estimé : <strong>55–75€/semaine</strong> pour 1 personne. Priorise le bio pour les fruits rouges et les légumes verts si possible. Surgélé = aussi nutritif et plus économique.</p>
+    </div>
+
+    <div class="courses-layout">
+      <div class="courses-category">
+        <h4>🥩 Protéines</h4>
+        <div class="course-item" onclick="toggleCourse(this)"><div class="course-check">✓</div><span class="course-name">Blanc de poulet ou dinde</span><span class="course-qty">500g</span></div>
+        <div class="course-item" onclick="toggleCourse(this)"><div class="course-check">✓</div><span class="course-name">Pavé de saumon frais</span><span class="course-qty">×2</span></div>
+        <div class="course-item" onclick="toggleCourse(this)"><div class="course-check">✓</div><span class="course-name">Thon au naturel en boîte</span><span class="course-qty">×2</span></div>
+        <div class="course-item" onclick="toggleCourse(this)"><div class="course-check">✓</div><span class="course-name">Œufs frais (plein air)</span><span class="course-qty">×12</span></div>
+        <div class="course-item" onclick="toggleCourse(this)"><div class="course-check">✓</div><span class="course-name">Skyr ou fromage blanc 0%</span><span class="course-qty">×2 pots</span></div>
+        <div class="course-item" onclick="toggleCourse(this)"><div class="course-check">✓</div><span class="course-name">Lentilles corail</span><span class="course-qty">300g</span></div>
+        <div class="course-item" onclick="toggleCourse(this)"><div class="course-check">✓</div><span class="course-name">Pois chiches en boîte</span><span class="course-qty">×2</span></div>
+      </div>
+
+      <div class="courses-category">
+        <h4>🌾 Bons Féculents</h4>
+        <div class="course-item" onclick="toggleCourse(this)"><div class="course-check">✓</div><span class="course-name">Flocons d'avoine</span><span class="course-qty">500g</span></div>
+        <div class="course-item" onclick="toggleCourse(this)"><div class="course-check">✓</div><span class="course-name">Patates douces</span><span class="course-qty">×4</span></div>
+        <div class="course-item" onclick="toggleCourse(this)"><div class="course-check">✓</div><span class="course-name">Quinoa</span><span class="course-qty">400g</span></div>
+        <div class="course-item" onclick="toggleCourse(this)"><div class="course-check">✓</div><span class="course-name">Riz basmati complet</span><span class="course-qty">500g</span></div>
+        <div class="course-item" onclick="toggleCourse(this)"><div class="course-check">✓</div><span class="course-name">Pain complet au levain</span><span class="course-qty">×1</span></div>
+      </div>
+
+      <div class="courses-category">
+        <h4>🥦 Légumes</h4>
+        <div class="course-item" onclick="toggleCourse(this)"><div class="course-check">✓</div><span class="course-name">Épinards frais ou surgelés</span><span class="course-qty">400g</span></div>
+        <div class="course-item" onclick="toggleCourse(this)"><div class="course-check">✓</div><span class="course-name">Brocoli</span><span class="course-qty">×2</span></div>
+        <div class="course-item" onclick="toggleCourse(this)"><div class="course-check">✓</div><span class="course-name">Courgettes</span><span class="course-qty">×3</span></div>
+        <div class="course-item" onclick="toggleCourse(this)"><div class="course-check">✓</div><span class="course-name">Haricots verts</span><span class="course-qty">400g</span></div>
+        <div class="course-item" onclick="toggleCourse(this)"><div class="course-check">✓</div><span class="course-name">Salade verte</span><span class="course-qty">×2</span></div>
+        <div class="course-item" onclick="toggleCourse(this)"><div class="course-check">✓</div><span class="course-name">Tomates cerises</span><span class="course-qty">×1 barq.</span></div>
+      </div>
+
+      <div class="courses-category">
+        <h4>🥑 Bons Gras & Fruits</h4>
+        <div class="course-item" onclick="toggleCourse(this)"><div class="course-check">✓</div><span class="course-name">Avocats</span><span class="course-qty">×3</span></div>
+        <div class="course-item" onclick="toggleCourse(this)"><div class="course-check">✓</div><span class="course-name">Huile d'olive extra vierge</span><span class="course-qty">×1 bouteille</span></div>
+        <div class="course-item" onclick="toggleCourse(this)"><div class="course-check">✓</div><span class="course-name">Graines mélange (lin, chia, courge)</span><span class="course-qty">250g</span></div>
+        <div class="course-item" onclick="toggleCourse(this)"><div class="course-check">✓</div><span class="course-name">Fruits rouges (frais ou surgelés)</span><span class="course-qty">500g</span></div>
+        <div class="course-item" onclick="toggleCourse(this)"><div class="course-check">✓</div><span class="course-name">Pommes</span><span class="course-qty">×4</span></div>
+        <div class="course-item" onclick="toggleCourse(this)"><div class="course-check">✓</div><span class="course-name">Citrons</span><span class="course-qty">×4</span></div>
+        <div class="course-item" onclick="toggleCourse(this)"><div class="course-check">✓</div><span class="course-name">Chocolat noir 85%</span><span class="course-qty">×2</span></div>
+      </div>
+
+      <div class="courses-category">
+        <h4>🧴 Condiments & Épices</h4>
+        <div class="course-item" onclick="toggleCourse(this)"><div class="course-check">✓</div><span class="course-name">Curcuma en poudre</span><span class="course-qty">×1</span></div>
+        <div class="course-item" onclick="toggleCourse(this)"><div class="course-check">✓</div><span class="course-name">Gingembre frais</span><span class="course-qty">×1 morceau</span></div>
+        <div class="course-item" onclick="toggleCourse(this)"><div class="course-check">✓</div><span class="course-name">Ail frais</span><span class="course-qty">×1 tête</span></div>
+        <div class="course-item" onclick="toggleCourse(this)"><div class="course-check">✓</div><span class="course-name">Moutarde à l'ancienne</span><span class="course-qty">×1</span></div>
+        <div class="course-item" onclick="toggleCourse(this)"><div class="course-check">✓</div><span class="course-name">Sauce soja sans gluten (tamari)</span><span class="course-qty">×1</span></div>
+      </div>
+
+      <div class="courses-category">
+        <h4>🫖 Boissons & Tisanes</h4>
+        <div class="course-item" onclick="toggleCourse(this)"><div class="course-check">✓</div><span class="course-name">Thé vert</span><span class="course-qty">×1 boîte</span></div>
+        <div class="course-item" onclick="toggleCourse(this)"><div class="course-check">✓</div><span class="course-name">Tisane de fenouil (drainage)</span><span class="course-qty">×1</span></div>
+        <div class="course-item" onclick="toggleCourse(this)"><div class="course-check">✓</div><span class="course-name">Lait végétal non sucré</span><span class="course-qty">×1L</span></div>
+        <div class="course-item" onclick="toggleCourse(this)"><div class="course-check">✓</div><span class="course-name">Eau pétillante ou plate</span><span class="course-qty">×6 bouteilles</span></div>
+      </div>
+    </div>
+
+    <button class="save-btn" onclick="resetCourses()" style="background: var(--warm-gray);">Réinitialiser la liste</button>
+  </div>
+
+  <!-- FOOTER CTA -->
+  <div class="footer-cta">
+    <h2>Tu veux aller plus loin ?</h2>
+    <p>Ce programme t'a donné les bases. L'accompagnement personnalisé, c'est là où les vraies transformations se produisent.</p>
+    <button class="cta-btn" onclick="alert('Redirection vers page de réservation d\'appel découverte')">Réserver mon appel découverte gratuit →</button>
+  </div>
+</div>

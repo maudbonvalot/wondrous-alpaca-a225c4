@@ -72,6 +72,111 @@
     color: white;
   }
 
+  /* Mobile menu toggle */
+  .nav-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    width: 40px;
+    height: 40px;
+    position: relative;
+  }
+
+  .nav-toggle span {
+    width: 24px;
+    height: 2px;
+    background: var(--deep-rose);
+    transition: all 0.3s ease;
+    border-radius: 2px;
+    position: absolute;
+  }
+
+  .nav-toggle span:nth-child(1) {
+    top: 12px;
+  }
+
+  .nav-toggle span:nth-child(2) {
+    top: 19px;
+  }
+
+  .nav-toggle span:nth-child(3) {
+    top: 26px;
+  }
+
+  .nav-toggle.active span:nth-child(1) {
+    transform: rotate(45deg);
+    top: 19px;
+  }
+
+  .nav-toggle.active span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .nav-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg);
+    top: 19px;
+  }
+
+  /* Responsive navigation */
+  @media (max-width: 968px) {
+    nav {
+      padding: 0 24px;
+    }
+
+    .nav-toggle {
+      display: flex;
+    }
+
+    .nav-links {
+      position: fixed;
+      top: 60px;
+      left: 0;
+      right: 0;
+      background: var(--warm-white);
+      flex-direction: column;
+      gap: 0;
+      padding: 0;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      box-shadow: 0 8px 16px rgba(44, 36, 32, 0.1);
+    }
+
+    .nav-links.active {
+      max-height: 400px;
+    }
+
+    .nav-links button {
+      width: 100%;
+      text-align: left;
+      padding: 16px 24px;
+      border-radius: 0;
+      border-bottom: 1px solid var(--gold-light);
+      font-size: 12px;
+    }
+
+    .nav-links button[style*="margin-left"] {
+      margin-left: 0 !important;
+      background: var(--terracotta) !important;
+      color: white !important;
+    }
+
+    .nav-links button:hover {
+      background: var(--blush);
+      color: var(--charcoal);
+    }
+
+    .nav-links button.active {
+      background: var(--deep-rose);
+      color: white;
+    }
+  }
+
   /* PAGES */
   .page {
     display: none;
