@@ -1,10 +1,8 @@
 async function showPage(name) {
-  // Charger la page si pas encore chargée
   if (!PageLoader.loadedPages.has(name)) {
     await PageLoader.loadPage(name);
   }
   
-  // Afficher/masquer
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.nav-links button').forEach(b => b.classList.remove('active'));
   
@@ -14,6 +12,8 @@ async function showPage(name) {
   if (targetPage) targetPage.classList.add('active');
   if (targetNav) targetNav.classList.add('active');
   
+  if (name === 'recettes') renderRecettesGrid();
+
   window.scrollTo(0, 0);
 }
 
@@ -96,8 +96,304 @@ async function showPage(name) {
     msg.style.opacity = '1';
     setTimeout(() => msg.style.opacity = '0', 2500);
   }
+
   // ---- RECETTES ----
   let currentPortions = 1;
+
+  const CAT_LABELS = {
+    petitdej: { label: '🌅 Petit-déjeuner', cls: 'petitdej' },
+    dejeuner:  { label: '☀️ Déjeuner',       cls: 'dejeuner'  },
+    diner:     { label: '🌙 Dîner',           cls: 'diner'     },
+    collation: { label: '🍎 Collation',       cls: 'collation' },
+  };
+
+  const recettesData = {
+    'bowl-proteine-fraise-ricotta': {
+      cats: ['petitdej'],
+      gradient: 'linear-gradient(135deg, #FDE8D8, #FBBF8A)',
+      desc: "Ricotta onctueuse, fraises fraîches et croustillant du granola. Le petit-déjeuner anti-inflammatoire qui lance ton métabolisme.",
+      title: "Bowl protéiné fraise-ricotta",
+      emoji: "🥣",
+      time: "10 min",
+      cat: "🌅 Petit-déjeuner",
+      macros: { p: [34, "g"], g: [38, "g"], l: [12, "g"], k: [420, ""] },
+      ingredients: [
+        ["Ricotta allégée", 200, "g"],
+        ["Fromage blanc 0%", 100, "g"],
+        ["Fraises fraîches", 150, "g"],
+        ["Granola avoine", 40, "g"],
+        ["Graines de chia", 10, "g"],
+        ["Miel", 1, "c.à.c"],
+      ],
+      steps: [
+        "Mélanger la ricotta et le fromage blanc jusqu'à texture lisse.",
+        "Laver et couper les fraises en morceaux.",
+        "Verser la base ricotta dans un bol, déposer les fraises.",
+        "Parsemer de granola, de graines de chia et arroser de miel.",
+      ],
+      tip: "💡 Pour une version encore plus légère, remplace le granola par des amandes effilées grillées.",
+    },
+    'omelette-printaniere-asperges-feta': {
+      cats: ['petitdej'],
+      gradient: 'linear-gradient(135deg, #E8F5E8, #B5C9B0)',
+      desc: "Asperges vertes sautées, feta et herbes fraîches dans une omelette dorée. Zinc, magnésium et protéines complètes.",
+      title: "Omelette printanière asperges & feta",
+      emoji: "🥚",
+      time: "15 min",
+      cat: "🌅 Petit-déjeuner",
+      macros: { p: [33, "g"], g: [6, "g"], l: [25, "g"], k: [380, ""] },
+      ingredients: [
+        ["Œufs entiers", 3, "pièces"],
+        ["Blancs d'œuf", 2, "pièces"],
+        ["Asperges vertes", 6, "tiges"],
+        ["Feta", 40, "g"],
+        ["Ciboulette fraîche", 1, "c.à.s"],
+        ["Huile d'olive", 1, "c.à.c"],
+      ],
+      steps: [
+        "Couper les asperges en tronçons et les faire revenir 5 min à la poêle.",
+        "Battre les œufs entiers et les blancs, saler, poivrer.",
+        "Verser dans la poêle huilée sur feu moyen, ajouter les asperges.",
+        "Émietter la feta et la ciboulette, plier l'omelette et servir.",
+      ],
+      tip: "💡 Ajoute des pointes d'asperges crues pour un croquant supplémentaire.",
+    },
+    'salade-poulet-grille-quinoa': {
+      cats: ['dejeuner'],
+      gradient: 'linear-gradient(135deg, #EDE8F5, #C8B8E8)',
+      desc: "Poulet grillé, quinoa et légumes frais. Le déjeuner équilibré par excellence pour tenir toute l'après-midi.",
+      title: "Salade de poulet grillé & quinoa",
+      emoji: "🥗",
+      time: "25 min",
+      cat: "☀️ Déjeuner",
+      macros: { p: [42, "g"], g: [40, "g"], l: [14, "g"], k: [490, ""] },
+      ingredients: [
+        ["Blanc de poulet", 150, "g"],
+        ["Quinoa cuit", 80, "g"],
+        ["Concombre", 0.5, "pièce"],
+        ["Tomates cerises", 80, "g"],
+        ["Roquette", 40, "g"],
+        ["Citron", 0.5, "pièce"],
+        ["Huile d'olive", 1, "c.à.s"],
+      ],
+      steps: [
+        "Cuire le quinoa selon les instructions, refroidir.",
+        "Griller le blanc de poulet 6 min de chaque côté, trancher.",
+        "Couper concombre et tomates cerises.",
+        "Assembler tous les ingrédients, assaisonner citron + huile d'olive.",
+      ],
+      tip: "💡 Pour gagner du temps, prépare le quinoa la veille et garde-le au frigo.",
+    },
+    'bowl-saumon-avocat-riz-complet': {
+      cats: ['dejeuner', 'diner'],
+      gradient: 'linear-gradient(135deg, #FFE8D8, #FFB38A)',
+      desc: "Saumon doré, avocat crémeux et riz complet. Le bowl oméga-3 qui rassasie sans alourdir — idéal en semaine.",
+      title: "Bowl saumon avocat & riz complet",
+      emoji: "🐟",
+      time: "20 min",
+      cat: "☀️ Déjeuner / 🌙 Dîner",
+      macros: { p: [38, "g"], g: [42, "g"], l: [18, "g"], k: [520, ""] },
+      ingredients: [
+        ["Pavé de saumon", 130, "g"],
+        ["Riz complet cuit", 120, "g"],
+        ["Avocat", 0.5, "pièce"],
+        ["Edamamés", 50, "g"],
+        ["Radis", 3, "pièces"],
+        ["Sauce tamari light", 1, "c.à.s"],
+        ["Sésame", 1, "c.à.c"],
+      ],
+      steps: [
+        "Cuire le saumon à la poêle antiadhésive 4 min par face.",
+        "Préparer le bol : riz, saumon émietté, avocat tranché.",
+        "Ajouter edamamés et radis tranchés.",
+        "Arroser de tamari, parsemer de sésame.",
+      ],
+      tip: "💡 Utilise du riz cuit la veille pour une texture plus ferme.",
+    },
+    'banana-bread-healthy-proteine': {
+      cats: ['collation'],
+      gradient: 'linear-gradient(135deg, #FFF0D8, #FDDBA0)',
+      desc: "Moelleux, sans sucre ajouté et riche en protéines. La collation parfaite de l'après-midi, préparable en 5 min.",
+      title: "Banana bread healthy protéiné",
+      emoji: "🍌",
+      time: "30 min",
+      cat: "🍎 Collation",
+      macros: { p: [12, "g"], g: [28, "g"], l: [6, "g"], k: [210, ""] },
+      ingredients: [
+        ["Banane mûre", 100, "g"],
+        ["Flocons d'avoine", 40, "g"],
+        ["Protéine vanille", 25, "g"],
+        ["Œuf entier", 1, "pièce"],
+        ["Compote sans sucre", 50, "g"],
+        ["Levure chimique", 0.5, "c.à.c"],
+      ],
+      steps: [
+        "Préchauffer le four à 180°C.",
+        "Mixer banane + œuf + compote jusqu'à obtenir une purée lisse.",
+        "Ajouter flocons d'avoine, protéine en poudre et levure, mélanger.",
+        "Cuire 25 min. Laisser refroidir avant de couper.",
+      ],
+      tip: "💡 Pour une version sans gluten, utilise des flocons de sarrasin à la place de l'avoine.",
+    },
+    'carrot-cake-healthy-light': {
+      cats: ['collation'],
+      gradient: 'linear-gradient(135deg, #F5E8D8, #E8C8A0)',
+      desc: "Un classique revisité sain et gourmand. Yaourt grec, carottes fraîches et cannelle — version légère et protéinée.",
+      title: "Carrot cake healthy light",
+      emoji: "🥕",
+      time: "30 min",
+      cat: "🍎 Collation",
+      macros: { p: [11, "g"], g: [22, "g"], l: [5, "g"], k: [190, ""] },
+      ingredients: [
+        ["Carottes râpées", 80, "g"],
+        ["Farine d'avoine", 50, "g"],
+        ["Protéine vanille", 20, "g"],
+        ["Œuf entier", 1, "pièce"],
+        ["Yaourt grec 0%", 80, "g"],
+        ["Cannelle, épices", 1, "c.à.c"],
+        ["Sirop d'agave", 1, "c.à.s"],
+      ],
+      steps: [
+        "Préchauffer le four à 175°C.",
+        "Mélanger œuf, yaourt grec et sirop d'agave.",
+        "Incorporer farine, protéine, cannelle et carottes râpées.",
+        "Cuire 22-25 min en moule. Refroidir avant de déguster.",
+      ],
+      tip: "💡 Ajoute des noix concassées pour un apport en bonnes graisses.",
+    },
+    'balls-proteinees-coco-datte': {
+      cats: ['collation'],
+      gradient: 'linear-gradient(135deg, #E8F0E8, #A8C8A0)',
+      desc: "3 ingrédients, 15 minutes. Des energy balls coco-dattes pour booster ta collation d'avant ou d'après sport.",
+      title: "Balls protéinées coco-datte",
+      emoji: "⚡",
+      time: "15 min",
+      cat: "🍎 Collation",
+      macros: { p: [8, "g"], g: [14, "g"], l: [4, "g"], k: [130, ""] },
+      ingredients: [
+        ["Dattes Medjool", 3, "pièces"],
+        ["Protéine chocolat", 20, "g"],
+        ["Flocons d'avoine", 30, "g"],
+        ["Noix de coco râpée", 10, "g"],
+        ["Beurre d'amande", 1, "c.à.s"],
+      ],
+      steps: [
+        "Mixer dattes dénoyautées + beurre d'amande jusqu'à pâte homogène.",
+        "Ajouter protéine et flocons, former une masse.",
+        "Façonner en 3 boules (ou 12 pour 4 portions).",
+        "Rouler dans la noix de coco, réfrigérer 10 min avant de servir.",
+      ],
+      tip: "💡 Conserve-les au congélateur pour une texture plus ferme et une conservation plus longue.",
+    },
+    'poulet-citron-herbes-legumes-vapeur': {
+      cats: ['diner'],
+      gradient: 'linear-gradient(135deg, #FFF0D8, #FDDBA0)',
+      desc: "Poulet mariné au citron et aux herbes, légumes vapeur croquants. Le dîner digeste et rassasiant du programme.",
+      title: "Poulet citron-herbes & légumes vapeur",
+      emoji: "🍗",
+      time: "28 min",
+      cat: "🌙 Dîner",
+      macros: { p: [46, "g"], g: [22, "g"], l: [13, "g"], k: [420, ""] },
+      ingredients: [
+        ["Blanc de poulet", 180, "g"],
+        ["Courgettes", 1, "pièce"],
+        ["Haricots verts", 100, "g"],
+        ["Citron", 1, "pièce"],
+        ["Ail", 1, "gousse"],
+        ["Herbes fraîches", 1, "c.à.s"],
+        ["Huile d'olive", 1, "c.à.s"],
+      ],
+      steps: [
+        "Mariner le poulet dans citron, ail et herbes 10 min.",
+        "Cuire les légumes à la vapeur 12-15 min.",
+        "Griller le poulet 7 min par face à feu moyen.",
+        "Servir avec les légumes vapeur et un filet d'huile d'olive.",
+      ],
+      tip: "💡 Utilise un panier vapeur en bambou pour une cuisson optimale des légumes.",
+    },
+    'crevettes-sautees-nouilles-courgettes': {
+      cats: ['diner'],
+      gradient: 'linear-gradient(135deg, #FFE8F0, #FFB8D8)',
+      desc: "Nouilles de courgettes spiralisées, crevettes à l'ail et basilic frais. Ultra rapide, léger et plein de saveurs.",
+      title: "Crevettes sautées & nouilles de courgettes",
+      emoji: "🦐",
+      time: "20 min",
+      cat: "🌙 Dîner",
+      macros: { p: [38, "g"], g: [18, "g"], l: [14, "g"], k: [360, ""] },
+      ingredients: [
+        ["Crevettes décortiquées", 200, "g"],
+        ["Courgettes spiralisées", 2, "pièces"],
+        ["Tomates cerises", 100, "g"],
+        ["Ail", 2, "gousses"],
+        ["Basilic frais", 8, "feuilles"],
+        ["Huile d'olive", 1, "c.à.s"],
+      ],
+      steps: [
+        "Spiraliser les courgettes pour faire des nouilles.",
+        "Faire revenir l'ail dans l'huile, ajouter les crevettes 3 min.",
+        "Ajouter tomates cerises et courgettes spirales, cuire 4 min.",
+        "Finir avec le basilic frais, assaisonner et servir.",
+      ],
+      tip: "💡 Pour une version plus gourmande, ajoute des pignons de pin grillés.",
+    },
+    'cabillaud-papillote-petits-pois': {
+      cats: ['diner'],
+      gradient: 'linear-gradient(135deg, #E8F5F0, #A8C8C0)',
+      desc: "Cuisson douce en papillote, zéro gras ajouté. Cabillaud fondant, petits pois et citron — le dîner détox du programme.",
+      title: "Cabillaud en papillote & petits pois",
+      emoji: "🐟",
+      time: "25 min",
+      cat: "🌙 Dîner",
+      macros: { p: [41, "g"], g: [24, "g"], l: [11, "g"], k: [390, ""] },
+      ingredients: [
+        ["Filet de cabillaud", 160, "g"],
+        ["Petits pois frais", 80, "g"],
+        ["Tomates cerises", 60, "g"],
+        ["Citron", 0.5, "pièce"],
+        ["Thym, laurier", 1, "brin"],
+        ["Huile d'olive", 1, "c.à.c"],
+      ],
+      steps: [
+        "Préchauffer le four à 200°C.",
+        "Placer le cabillaud sur papier cuisson, entourer de légumes et herbes.",
+        "Arroser de citron et d'huile, fermer hermétiquement la papillote.",
+        "Cuire 18-20 min. Ouvrir délicatement et servir directement.",
+      ],
+      tip: "💡 Ajoute des rondelles de citron dans la papillote pour plus de saveur.",
+    }
+  };
+
+  function renderRecettesGrid() {
+    const grid = document.getElementById('recettes-grid');
+    if (!grid || grid.children.length > 0) return;
+
+    grid.innerHTML = Object.entries(recettesData).map(([id, r]) => {
+      const catDataAttr = r.cats.join(' ');
+      const catDisplay = r.cats.map(c => CAT_LABELS[c].label).join(' / ');
+      const catCls = CAT_LABELS[r.cats[0]].cls;
+      const mp = r.macros;
+
+      return `
+      <div class="recette-card" data-cat="${catDataAttr}">
+        <div class="recette-img" style="background: ${r.gradient};">
+          <span style="font-size:52px;">${r.emoji}</span>
+          <div class="recette-time-badge">⏱ ${r.time}</div>
+        </div>
+        <div class="recette-body">
+          <div class="recette-cat-tag ${catCls}">${catDisplay}</div>
+          <h3 class="recette-title">${r.title}</h3>
+          <p class="recette-desc">${r.desc}</p>
+          <div class="macros-bar">
+            <div class="macro-pill protein"><span class="macro-val" data-base="${mp.p[0]}" data-unit="${mp.p[1]}">${mp.p[0]}${mp.p[1]}</span><span class="macro-name">Protéines</span></div>
+            <div class="macro-pill carb"><span class="macro-val" data-base="${mp.g[0]}" data-unit="${mp.g[1]}">${mp.g[0]}${mp.g[1]}</span><span class="macro-name">Glucides</span></div>
+            <div class="macro-pill fat"><span class="macro-val" data-base="${mp.l[0]}" data-unit="${mp.l[1]}">${mp.l[0]}${mp.l[1]}</span><span class="macro-name">Lipides</span></div>
+            <div class="macro-pill kcal"><span class="macro-val" data-base="${mp.k[0]}" data-unit="${mp.k[1]}">${mp.k[0]}</span><span class="macro-name">Kcal</span></div>
+          </div>
+          <button class="voir-recette-btn" onclick="openRecette('${id}')">Voir la recette →</button>
+        </div>
+      </div>`;
+    }).join('');
+  }
 
   function setPortions(n) {
     currentPortions = n;
@@ -109,7 +405,6 @@ async function showPage(name) {
       const val = base * n;
       el.textContent = (Number.isInteger(val) ? val : val.toFixed(0)) + unit;
     });
-    // Update modal if open
     if (document.getElementById('recette-modal').style.display === 'flex') {
       document.querySelectorAll('.modal-ing-qty').forEach(el => {
         const base = parseFloat(el.dataset.base);
@@ -138,231 +433,6 @@ async function showPage(name) {
     });
   }
 
-  const recettesData = {
-    'bowl-skyr': {
-      title: "Bowl Skyr Fruits Rouges",
-      emoji: "🥣",
-      time: "5 min",
-      cat: "🌅 Petit-déjeuner",
-      macros: { p: [25,"g"], g: [38,"g"], l: [6,"g"], k: [300,""] },
-      ingredients: [
-        ["Skyr nature", 150, "g"],
-        ["Fruits rouges (frais ou surgelés)", 100, "g"],
-        ["Flocons d\'avoine", 50, "g"],
-        ["Graines de chia", 10, "g"],
-        ["Graines de courge", 10, "g"],
-        ["Miel (optionnel)", 5, "g"],
-      ],
-      steps: [
-        "Verse le skyr dans un bol. Si tu utilises des fruits surgelés, décongèle-les 5 min au micro-ondes.",
-        "Ajoute les flocons d\'avoine directement dans le skyr et mélange légèrement.",
-        "Dispose les fruits rouges sur le dessus.",
-        "Saupoudre les graines de chia et de courge.",
-        "Ajoute le miel si tu veux une touche sucrée. Sers immédiatement.",
-      ],
-      tip: "💡 Prépare ton bowl la veille (overnight) en mettant les flocons dans le skyr au réfrigérateur — la texture sera encore meilleure le matin !",
-    },
-    'omelette': {
-      title: "Omelette Épinards & Feta",
-      emoji: "🍳",
-      time: "8 min",
-      cat: "🌅 Petit-déjeuner",
-      macros: { p: [22,"g"], g: [4,"g"], l: [18,"g"], k: [260,""] },
-      ingredients: [
-        ["Oeufs entiers", 3, "pièces"],
-        ["Épinards frais", 80, "g"],
-        ["Feta émiettée", 30, "g"],
-        ["Huile d\'olive", 5, "ml"],
-        ["Sel, poivre, herbes", 1, "pincée"],
-      ],
-      steps: [
-        "Bats les oeufs avec une pincée de sel et de poivre dans un bol.",
-        "Fais chauffer l\'huile d\'olive à feu moyen dans une poêle antiadhésive.",
-        "Ajoute les épinards et fais-les tomber 1-2 min jusqu\'à ce qu\'ils réduisent.",
-        "Verse les oeufs sur les épinards. Laisse coaguler 1 min sans toucher.",
-        "Émiette la feta sur la moitié de l\'omelette, puis rabats l\'autre moitié dessus.",
-        "Sers immédiatement avec quelques herbes fraîches si tu en as.",
-      ],
-      tip: "💡 Pour encore plus de protéines : utilise 2 oeufs entiers + 2 blancs d\'oeufs. Tu passes à ~28g de protéines pour seulement 200 kcal.",
-    },
-    'saumon': {
-      title: "Saumon Papillote Gingembre",
-      emoji: "🐟",
-      time: "20 min",
-      cat: "☀️ Déjeuner / 🌙 Dîner",
-      macros: { p: [34,"g"], g: [8,"g"], l: [14,"g"], k: [290,""] },
-      ingredients: [
-        ["Pavé de saumon frais", 150, "g"],
-        ["Courgette", 100, "g"],
-        ["Brocoli en fleurettes", 100, "g"],
-        ["Gingembre frais râpé", 10, "g"],
-        ["Sauce soja sans gluten (tamari)", 10, "ml"],
-        ["Jus de citron", 15, "ml"],
-        ["Graines de sésame", 5, "g"],
-      ],
-      steps: [
-        "Préchauffe le four à 200°C. Découpe une grande feuille de papier sulfurisé.",
-        "Dispose les légumes (courgette tranchée, brocoli) au centre de la feuille.",
-        "Pose le pavé de saumon sur les légumes.",
-        "Mélange gingembre râpé, sauce soja et jus de citron. Verse sur le saumon.",
-        "Referme la papillote hermétiquement. Enfourne 15-18 min.",
-        "Ouvre la papillote, saupoudre de sésame et sers immédiatement.",
-      ],
-      tip: "💡 En phase menstruelle ? Ajoute une pincée de curcuma et une rondelle de citron sur le saumon avant de fermer la papillote — effet anti-douleur naturel puissant.",
-    },
-    'bowl-quinoa': {
-      title: "Bowl Quinoa Thon Avocat",
-      emoji: "🥗",
-      time: "10 min",
-      cat: "☀️ Déjeuner",
-      macros: { p: [38,"g"], g: [42,"g"], l: [16,"g"], k: [460,""] },
-      ingredients: [
-        ["Quinoa cuit", 150, "g"],
-        ["Thon au naturel égoutté", 130, "g"],
-        ["Avocat", 60, "g"],
-        ["Salade verte ou roquette", 40, "g"],
-        ["Tomates cerises", 50, "g"],
-        ["Jus de citron", 15, "ml"],
-        ["Huile d\'olive", 10, "ml"],
-        ["Sel, poivre, herbes", 1, "pincée"],
-      ],
-      steps: [
-        "Cuis le quinoa selon les instructions (ou utilise du quinoa précuit en sachet — 2 min micro-ondes).",
-        "Dispose la salade dans un bol, puis le quinoa chaud.",
-        "Émiette le thon par-dessus, tranche l\'avocat en lamelles.",
-        "Ajoute les tomates cerises coupées en deux.",
-        "Prépare la vinaigrette : citron + huile d\'olive + sel + herbes. Verse sur le bowl.",
-        "Mélange légèrement avant de déguster.",
-      ],
-      tip: "💡 Prépare le quinoa en grande quantité le dimanche (batch cooking) et conserve-le 4 jours au frigo. Tu as des déjeuners prêts en 3 min toute la semaine.",
-    },
-    'poulet': {
-      title: "Poulet Grillé & Patate Douce Rôtie",
-      emoji: "🍗",
-      time: "30 min",
-      cat: "☀️ Déjeuner",
-      macros: { p: [42,"g"], g: [35,"g"], l: [8,"g"], k: [380,""] },
-      ingredients: [
-        ["Blanc de poulet", 180, "g"],
-        ["Patate douce", 160, "g"],
-        ["Haricots verts ou brocoli", 120, "g"],
-        ["Curcuma en poudre", 3, "g"],
-        ["Paprika doux", 2, "g"],
-        ["Huile d\'olive", 10, "ml"],
-        ["Ail en poudre", 2, "g"],
-        ["Jus de citron", 10, "ml"],
-      ],
-      steps: [
-        "Préchauffe le four à 200°C. Épluche et coupe la patate douce en cubes de 2cm.",
-        "Mélange les cubes avec l\'huile, le curcuma, le paprika, l\'ail. Étale sur une plaque. Enfourne 20-25 min.",
-        "Pendant ce temps, aplatit légèrement le blanc de poulet avec la paume.",
-        "Assaisonne avec curcuma, sel, poivre et un filet de citron. Fais griller à la poêle 5-6 min de chaque côté à feu moyen-vif.",
-        "Fais cuire les haricots verts à la vapeur 5-7 min.",
-        "Dresse : patate douce + poulet tranché + légumes. Arrose du jus de cuisson de la poêle.",
-      ],
-      tip: "💡 Le secret d\'un poulet moelleux : laisse-le reposer 3 min hors du feu avant de le trancher. Les jus se redistribuent et la chair reste juteuse.",
-    },
-    'soupe': {
-      title: "Soupe Lentilles Corail Curcuma",
-      emoji: "🍲",
-      time: "25 min",
-      cat: "🌙 Dîner",
-      macros: { p: [18,"g"], g: [48,"g"], l: [5,"g"], k: [310,""] },
-      ingredients: [
-        ["Lentilles corail sèches", 100, "g"],
-        ["Bouillon de légumes", 500, "ml"],
-        ["Oignon", 80, "g"],
-        ["Ail", 10, "g"],
-        ["Curcuma en poudre", 5, "g"],
-        ["Gingembre frais", 10, "g"],
-        ["Lait de coco léger", 50, "ml"],
-        ["Huile d\'olive", 5, "ml"],
-        ["Jus de citron", 15, "ml"],
-      ],
-      steps: [
-        "Rince les lentilles corail sous l\'eau froide.",
-        "Fais revenir l\'oignon émincé dans l\'huile d\'olive 3 min. Ajoute l\'ail et le gingembre râpé.",
-        "Ajoute le curcuma, mélange 30 secondes pour le faire torréfier légèrement.",
-        "Verse les lentilles et le bouillon. Porte à ébullition puis laisse mijoter 15-18 min.",
-        "Ajoute le lait de coco léger et le jus de citron. Mixe (ou laisse texturée selon ta préférence).",
-        "Rectifie l\'assaisonnement. Sers avec quelques graines de courge sur le dessus.",
-      ],
-      tip: "💡 Idéale en phase menstruelle : les lentilles sont riches en fer, le curcuma est anti-douleur, le gingembre réchauffe. Prépares-en pour 3-4 jours et réchauffe au besoin.",
-    },
-    'pois-chiches': {
-      title: "Pois Chiches Rôtis & Salade Verte",
-      emoji: "🌿",
-      time: "35 min",
-      cat: "🌙 Dîner / ☀️ Déjeuner",
-      macros: { p: [16,"g"], g: [40,"g"], l: [12,"g"], k: [330,""] },
-      ingredients: [
-        ["Pois chiches en boîte égouttés", 200, "g"],
-        ["Salade verte (roquette ou mâche)", 60, "g"],
-        ["Tomates cerises", 60, "g"],
-        ["Concombre", 80, "g"],
-        ["Huile d\'olive", 15, "ml"],
-        ["Paprika fumé", 3, "g"],
-        ["Cumin", 2, "g"],
-        ["Jus de citron", 15, "ml"],
-        ["Herbes fraîches", 10, "g"],
-      ],
-      steps: [
-        "Préchauffe le four à 220°C. Égoutte et sèche très bien les pois chiches avec du papier absorbant — c\'est la clé du croustillant !",
-        "Mélange les pois chiches avec 10ml d\'huile, paprika, cumin, sel. Étale sur une plaque en une seule couche.",
-        "Enfourne 25-30 min en remuant à mi-cuisson. Ils doivent être bien dorés et croustillants.",
-        "Pendant ce temps, prépare la salade : lave et essore, coupe les tomates et le concombre.",
-        "Vinaigrette : 5ml huile d\'olive + jus de citron + sel + herbes.",
-        "Dispose la salade, verse les pois chiches encore chauds dessus, arrose de vinaigrette.",
-      ],
-      tip: "💡 Les pois chiches rôtis se conservent 3 jours dans un bocal ouvert (pas de boîte hermétique sinon ils ramollissent). Prépares-en plus et utilise-les aussi comme snack.",
-    },
-    'pancakes': {
-      title: "Pancakes Protéinés Sarrasin",
-      emoji: "🥞",
-      time: "15 min",
-      cat: "🌅 Petit-déjeuner / 🍎 Collation",
-      macros: { p: [20,"g"], g: [32,"g"], l: [7,"g"], k: [270,""] },
-      ingredients: [
-        ["Farine de sarrasin", 60, "g"],
-        ["Skyr ou fromage blanc", 100, "g"],
-        ["Oeuf entier", 1, "pièce"],
-        ["Lait végétal non sucré", 60, "ml"],
-        ["Levure chimique", 3, "g"],
-        ["Vanille (optionnel)", 1, "pincée"],
-        ["Fruits rouges (garniture)", 80, "g"],
-      ],
-      steps: [
-        "Mélange la farine de sarrasin, la levure et la vanille dans un bol.",
-        "Dans un autre bol, bats l\'oeuf avec le skyr et le lait végétal jusqu\'à obtenir un mélange homogène.",
-        "Verse la préparation liquide sur les ingrédients secs. Mélange sans trop travailler la pâte (quelques grumeaux sont ok).",
-        "Fais chauffer une poêle antiadhésive à feu moyen-doux. Pas besoin de matière grasse.",
-        "Verse des petites louches de pâte (8-9cm de diamètre). Cuis 2 min jusqu\'à la formation de bulles, retourne, 1 min de l\'autre côté.",
-        "Sers avec les fruits rouges et un filet de miel ou de skyr nature.",
-      ],
-      tip: "💡 La farine de sarrasin est naturellement sans gluten et a un index glycémique plus bas que la farine de blé — parfaite pour les femmes sensibles à l\'insuline.",
-    },
-    'collation-skyr': {
-      title: "Collation Skyr & Graines",
-      emoji: "🍓",
-      time: "3 min",
-      cat: "🍎 Collation",
-      macros: { p: [17,"g"], g: [14,"g"], l: [5,"g"], k: [170,""] },
-      ingredients: [
-        ["Skyr nature", 150, "g"],
-        ["Graines de courge", 10, "g"],
-        ["Graines de lin moulues", 5, "g"],
-        ["Fruits rouges", 50, "g"],
-        ["Cannelle (optionnel)", 1, "pincée"],
-      ],
-      steps: [
-        "Verse le skyr dans un petit bol ou un pot.",
-        "Ajoute les fruits rouges par-dessus.",
-        "Saupoudre les graines de courge et de lin.",
-        "Une pincée de cannelle pour réguler la glycémie. Sers immédiatement.",
-      ],
-      tip: "💡 Prends cette collation 1h avant une séance de sport ou 2h avant le dîner. Les protéines du skyr évitent le pic de cortisol de fin d\'après-midi.",
-    },
-  };
   function openRecette(id) {
     const r = recettesData[id];
     if (!r) return;
