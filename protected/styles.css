@@ -443,6 +443,7 @@
   .module-content {
     padding-left: 48px;
     padding-top: 20px;
+    min-width: 0; /* évite le débordement horizontal (grid 1fr + contenu large) */
   }
 
   .content-block { display: none; }
@@ -591,6 +592,7 @@
     gap: 16px;
     margin-bottom: 16px;
     align-items: flex-start;
+    min-width: 0;
   }
 
   .meal-label {
@@ -615,6 +617,9 @@
     font-size: 13px;
     color: var(--charcoal);
     line-height: 1.6;
+    flex: 1;
+    min-width: 0;
+    overflow-wrap: anywhere;
   }
 
   .macro-bar {
@@ -624,9 +629,15 @@
     border-radius: 12px;
     padding: 16px 20px;
     margin-top: 20px;
+    flex-wrap: wrap;
+    min-width: 0;
   }
 
-  .macro-item { text-align: center; flex: 1; }
+  .macro-item {
+    text-align: center;
+    flex: 1 1 0;
+    min-width: 72px;
+  }
 
   .macro-value {
     font-family: 'Cormorant Garamond', serif;
@@ -1753,9 +1764,30 @@
     .hero { grid-template-columns: 1fr; padding: 40px 24px; }
     .hero-visual { padding-left: 0; margin-top: 32px; }
     .hero h1 { font-size: 42px; }
-    .module-grid { grid-template-columns: 1fr; }
+    .module-grid {
+      grid-template-columns: 1fr;
+      padding: 0 20px 48px;
+      max-width: 100%;
+    }
     .module-sidebar { border-right: none; border-bottom: 1px solid var(--gold-light); padding-right: 0; padding-bottom: 20px; display: flex; gap: 8px; flex-wrap: wrap; }
     .module-content { padding-left: 0; padding-top: 24px; }
+    .content-block h3 {
+      font-size: 26px;
+      line-height: 1.25;
+      overflow-wrap: anywhere;
+    }
+    .week-tabs { gap: 6px; margin-bottom: 20px; }
+    .week-tab { padding: 8px 14px; font-size: 11px; }
+    .meal-detail { padding: 20px 16px; min-width: 0; }
+    .meal-detail h4 { font-size: 22px; word-break: break-word; }
+    .macro-bar {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px 16px;
+      padding: 14px 16px;
+    }
+    .macro-item { min-width: 0; }
+    .macro-value { font-size: 22px; }
     .tracker-grid { grid-template-columns: repeat(2, 1fr); }
     .phase-selector { grid-template-columns: repeat(2, 1fr); }
     .phase-two-col { grid-template-columns: 1fr; }
@@ -1763,4 +1795,12 @@
     .tips-grid { grid-template-columns: 1fr; }
     .activity-week { grid-template-columns: repeat(2, 1fr); }
     .day-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+
+  @media (max-width: 480px) {
+    .meal-row {
+      flex-direction: column;
+      gap: 8px;
+    }
+    .meal-label { align-self: flex-start; }
   }
