@@ -1,6 +1,6 @@
 # 🌸 Reset Métabolique
 
-Application web complète avec paiement Stripe, authentification Auth0 et automation email SendGrid pour le programme nutritionnel "Reset Métabolique" destiné aux femmes de 30-50 ans.
+Application web complète avec paiement Stripe, authentification Auth0 et automation email SendGrid pour le programme nutritionnel "Reset Métabolique" destiné aux femmes de 30-55 ans.
 
 ---
 
