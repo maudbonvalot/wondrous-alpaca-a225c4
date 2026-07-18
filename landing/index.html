@@ -14,7 +14,10 @@
 <!-- ════════ LANDING PAGE ════════ -->
 <div id="landing" class="screen active">
 
-  <header>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="scroll-progress" aria-hidden="true"><span id="scrollBar"></span></div>
+
+  <header id="siteHeader">
     <div class="logo">Reset <em>Métabolique</em> ✦</div>
     <a href="https://buy.stripe.com/cNi00j2mVfKqgFT6WY3ks02" class="btn-primary" target="_blank" rel="noopener">Accéder au programme — 87€</a>
   </header>
@@ -26,21 +29,21 @@
         <div class="eyebrow-line"></div>
         <div class="eyebrow-text">Programme Féminin · 30–50 ans</div>
       </div>
-      <h1 class="hero-h1" style="animation:fadeUp .9s ease .2s both">
+      <h1 class="hero-h1" id="heroTitle">
         Ton corps n'a pas<br>
         <em>besoin d'un régime.</em><br>
-        Il a besoin d'être compris.
+        Il a besoin d'être <span class="hl">compris.<svg viewBox="0 0 220 14" preserveAspectRatio="none" aria-hidden="true"><path d="M4 10 C 70 3, 150 2, 216 8"/></svg></span>
       </h1>
-      <p class="hero-sub" style="animation:fadeUp .9s ease .3s both">
+      <p class="hero-sub" style="animation:fadeUp .9s ease .9s both">
         Le premier programme conçu pour les femmes dont le métabolisme change —
         <strong>nutrition adaptée aux hormones, cycle menstruel, activité physique ciblée</strong>
         et tracker quotidien persistant.
       </p>
-      <div class="hero-actions" style="animation:fadeUp .9s ease .45s both">
+      <div class="hero-actions" style="animation:fadeUp .9s ease 1.05s both">
         <a href="https://buy.stripe.com/cNi00j2mVfKqgFT6WY3ks02" class="btn-primary pulse-anim" target="_blank" rel="noopener">Commencer maintenant</a>
         <a href="#programme" class="link-secondary">Voir le programme ↓</a>
       </div>
-      <div class="proof-row" style="animation:fadeUp .9s ease .6s both">
+      <div class="proof-row" style="animation:fadeUp .9s ease 1.2s both">
         <!-- PLACEHOLDER AVATARS — remplace par des photos de tes vraies clientes -->
         <div class="avatars">
           <div class="av"><img src="https://randomuser.me/api/portraits/women/88.jpg" alt=""></div>
@@ -56,21 +59,33 @@
       </div>
     </div>
     <div class="hero-right">
-      <!-- PLACEHOLDER PHOTO — remplace l'URL src par ta propre photo (femme 30-50 ans, cuisine/nutrition) -->
-      <img class="hero-photo" src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=1000&q=80" alt="Femme préparant un repas équilibré dans sa cuisine">
-      <div class="hero-card">
-        <div class="card-tag">✦ Ce que tu reçois</div>
-        <div style="font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:500;margin-bottom:14px;line-height:1.3">Programme Reset Métabolique<br><em style="color:var(--terra)">Accès immédiat</em></div>
-        <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:18px">
-          <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--mist)"><span style="width:5px;height:5px;border-radius:50%;background:var(--terra);flex-shrink:0"></span>Menus 4 semaines jour par jour</div>
-          <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--mist)"><span style="width:5px;height:5px;border-radius:50%;background:var(--terra);flex-shrink:0"></span>9 recettes protéinées + macros</div>
-          <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--mist)"><span style="width:5px;height:5px;border-radius:50%;background:var(--terra);flex-shrink:0"></span>Guide cycle & hormones</div>
-          <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--mist)"><span style="width:5px;height:5px;border-radius:50%;background:var(--terra);flex-shrink:0"></span>Tracker quotidien persistant</div>
-          <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--mist)"><span style="width:5px;height:5px;border-radius:50%;background:var(--terra);flex-shrink:0"></span>Liste de courses cochable</div>
+      <div class="hero-blob" aria-hidden="true"></div>
+      <div class="hero-visual">
+        <div class="hero-arch">
+          <!-- PLACEHOLDER PHOTO — remplace l'URL src par ta propre photo (femme 30-50 ans, cuisine/nutrition) -->
+          <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=1000&q=80" alt="Femme préparant un repas équilibré dans sa cuisine">
         </div>
-        <div class="card-price-row">
-          <div class="card-price">87€</div>
-          <div style="font-size:11px;color:var(--mist);line-height:1.4">Accès à vie<br>Données sauvegardées</div>
+        <div class="spin-badge" aria-hidden="true">
+          <svg viewBox="0 0 120 120">
+            <defs><path id="circlePath" d="M60,60 m-45,0 a45,45 0 1,1 90,0 a45,45 0 1,1 -90,0"/></defs>
+            <text><textPath href="#circlePath">Reset métabolique · programme féminin · 30–50 ans · </textPath></text>
+          </svg>
+          <span class="spin-center">✦</span>
+        </div>
+        <div class="hero-card" id="tiltCard">
+          <div class="card-tag">✦ Ce que tu reçois</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:500;margin-bottom:14px;line-height:1.3">Programme Reset Métabolique<br><em style="color:var(--terra)">Accès immédiat</em></div>
+          <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:18px">
+            <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--mist)"><span style="width:5px;height:5px;border-radius:50%;background:var(--terra);flex-shrink:0"></span>Menus 4 semaines jour par jour</div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--mist)"><span style="width:5px;height:5px;border-radius:50%;background:var(--terra);flex-shrink:0"></span>9 recettes protéinées + macros</div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--mist)"><span style="width:5px;height:5px;border-radius:50%;background:var(--terra);flex-shrink:0"></span>Guide cycle & hormones</div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--mist)"><span style="width:5px;height:5px;border-radius:50%;background:var(--terra);flex-shrink:0"></span>Tracker quotidien persistant</div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--mist)"><span style="width:5px;height:5px;border-radius:50%;background:var(--terra);flex-shrink:0"></span>Liste de courses cochable</div>
+          </div>
+          <div class="card-price-row">
+            <div class="card-price">87€</div>
+            <div style="font-size:11px;color:var(--mist);line-height:1.4">Accès à vie<br>Données sauvegardées</div>
+          </div>
         </div>
       </div>
     </div>
@@ -79,8 +94,8 @@
   <!-- MARQUEE -->
   <div class="marquee-strip">
     <div class="marquee-track">
-      <span class="marquee-item">Nutrition hormonale</span><span class="marquee-item">Reset métabolique</span><span class="marquee-item">~100g protéines/jour</span><span class="marquee-item">Cycle menstruel</span><span class="marquee-item">Périménopause</span><span class="marquee-item">Anti-inflammatoire</span><span class="marquee-item">Tracker persistant</span><span class="marquee-item">Relances personnalisées</span>
-      <span class="marquee-item">Nutrition hormonale</span><span class="marquee-item">Reset métabolique</span><span class="marquee-item">~100g protéines/jour</span><span class="marquee-item">Cycle menstruel</span><span class="marquee-item">Périménopause</span><span class="marquee-item">Anti-inflammatoire</span><span class="marquee-item">Tracker persistant</span><span class="marquee-item">Relances personnalisées</span>
+      <span class="mq mq-serif">Nutrition hormonale</span><span class="mq-star">✦</span><span class="mq mq-sans">Reset métabolique</span><span class="mq-star">✦</span><span class="mq mq-serif">~100g protéines/jour</span><span class="mq-star">✦</span><span class="mq mq-sans">Cycle menstruel</span><span class="mq-star">✦</span><span class="mq mq-serif">Périménopause</span><span class="mq-star">✦</span><span class="mq mq-sans">Anti-inflammatoire</span><span class="mq-star">✦</span><span class="mq mq-serif">Tracker persistant</span><span class="mq-star">✦</span><span class="mq mq-sans">Relances personnalisées</span><span class="mq-star">✦</span>
+      <span class="mq mq-serif">Nutrition hormonale</span><span class="mq-star">✦</span><span class="mq mq-sans">Reset métabolique</span><span class="mq-star">✦</span><span class="mq mq-serif">~100g protéines/jour</span><span class="mq-star">✦</span><span class="mq mq-sans">Cycle menstruel</span><span class="mq-star">✦</span><span class="mq mq-serif">Périménopause</span><span class="mq-star">✦</span><span class="mq mq-sans">Anti-inflammatoire</span><span class="mq-star">✦</span><span class="mq mq-serif">Tracker persistant</span><span class="mq-star">✦</span><span class="mq mq-sans">Relances personnalisées</span><span class="mq-star">✦</span>
     </div>
   </div>
 
@@ -92,13 +107,17 @@
           Tu fais tout bien —<br>et pourtant ton corps<br><em>ne répond plus comme avant.</em>
         </div>
         <!-- PLACEHOLDER PHOTO — remplace par ta propre photo -->
-        <img class="problem-photo" src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=900&q=80" alt="Femme pratiquant le yoga au coucher du soleil">
+        <div class="problem-photo-wrap">
+          <div class="problem-photo-clip">
+            <img class="problem-photo" src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=900&q=80" alt="Femme pratiquant le yoga au coucher du soleil" data-parallax="0.06">
+          </div>
+        </div>
       </div>
       <ul class="problem-list">
-        <li class="problem-item fade-up"><div class="problem-item-icon">⚡</div><div><h4>Fatigue chronique inexpliquée</h4><p>Tu dors 8h et tu te réveilles épuisée. Ton cortisol et ta thyroïde ont besoin d'attention.</p></div></li>
-        <li class="problem-item fade-up"><div class="problem-item-icon">⚖️</div><div><h4>Prise de poids malgré l'effort</h4><p>Le changement hormonal modifie où et comment ton corps stocke les graisses.</p></div></li>
-        <li class="problem-item fade-up"><div class="problem-item-icon">🌊</div><div><h4>Ballonnements, digestion difficile</h4><p>La fluctuation des œstrogènes impacte directement ton microbiote.</p></div></li>
-        <li class="problem-item fade-up"><div class="problem-item-icon">🎢</div><div><h4>Fringales sucrées, humeur instable</h4><p>Des pics de cortisol et une glycémie mal gérée — que la nutrition peut corriger.</p></div></li>
+        <li class="problem-item fade-up"><div class="problem-item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg></div><div><h4>Fatigue chronique inexpliquée</h4><p>Tu dors 8h et tu te réveilles épuisée. Ton cortisol et ta thyroïde ont besoin d'attention.</p></div></li>
+        <li class="problem-item fade-up"><div class="problem-item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><div><h4>Prise de poids malgré l'effort</h4><p>Le changement hormonal modifie où et comment ton corps stocke les graisses.</p></div></li>
+        <li class="problem-item fade-up"><div class="problem-item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8c2-2 4-2 6 0s4 2 6 0 4-2 6 0M2 14c2-2 4-2 6 0s4 2 6 0 4-2 6 0"/></svg></div><div><h4>Ballonnements, digestion difficile</h4><p>La fluctuation des œstrogènes impacte directement ton microbiote.</p></div></li>
+        <li class="problem-item fade-up"><div class="problem-item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-6 4 4 6-8"/><path d="M21 7v4h-4"/></svg></div><div><h4>Fringales sucrées, humeur instable</h4><p>Des pics de cortisol et une glycémie mal gérée — que la nutrition peut corriger.</p></div></li>
       </ul>
     </div>
   </div>
@@ -114,21 +133,18 @@
         <p class="section-lead fade-up">Pas un régime générique. Un protocole qui intègre ta biologie féminine — hormones, cycle, métabolisme.</p>
       </div>
       <div class="modules-grid">
-        <div class="module-card fade-up"><div class="module-num">01</div><span class="module-emoji">🥗</span><h3 class="module-title">Nutrition & Métabolisme</h3><p class="module-desc">Menus complets 4 semaines, ~100g protéines, anti-inflammatoires. Tout est pensé pour relancer sans se priver.</p><div class="tags"><span class="tag">4 semaines</span><span class="tag">Jour par jour</span><span class="tag">Macros</span></div></div>
-        <div class="module-card fade-up"><div class="module-num">02</div><span class="module-emoji">🌙</span><h3 class="module-title">Cycle & Hormones</h3><p class="module-desc">Guide des 4 phases hormonales avec alimentation et sport adaptés. Section périménopause incluse.</p><div class="tags"><span class="tag">4 phases</span><span class="tag">Périménopause</span><span class="tag">SPM</span></div></div>
-        <div class="module-card fade-up"><div class="module-num">03</div><span class="module-emoji">🍳</span><h3 class="module-title">9 Recettes Protéinées</h3><p class="module-desc">Macros détaillés, toggle 1 ou 4 portions, liées aux phases hormonales. Toutes en moins de 30 min.</p><div class="tags"><span class="tag">Macros détaillés</span><span class="tag">1 ou 4 portions</span></div></div>
-        <div class="module-card fade-up"><div class="module-num">04</div><span class="module-emoji">📊</span><h3 class="module-title">Tracker Persistant</h3><p class="module-desc">Données sauvegardées entre chaque session. Historique 7 jours, score quotidien, relances personnalisées.</p><div class="tags"><span class="tag">Persistant</span><span class="tag">Score quotidien</span></div></div>
-        <div class="module-card fade-up"><div class="module-num">05</div><span class="module-emoji">🛒</span><h3 class="module-title">Liste de Courses</h3><p class="module-desc">Cochable par catégorie, quantités et budget estimé (~55–75€/semaine). Batch cooking du dimanche.</p><div class="tags"><span class="tag">Cochable</span><span class="tag">Budget inclus</span></div></div>
-        <div class="module-card featured fade-up"><div class="module-num">✦</div><span class="module-emoji">💪</span><h3 class="module-title">Sport selon le Cycle</h3><p class="module-desc">Le bon sport au bon moment. Fini la culpabilité de ne pas performer en phase menstruelle.</p><div class="tags"><span class="tag">Adapté au cycle</span><span class="tag">Tous niveaux</span></div></div>
+        <div class="module-card fade-up"><div class="module-num">01</div><h3 class="module-title">Nutrition & Métabolisme</h3><p class="module-desc">Menus complets 4 semaines, ~100g protéines, anti-inflammatoires. Tout est pensé pour relancer sans se priver.</p><div class="tags"><span class="tag">4 semaines</span><span class="tag">Jour par jour</span><span class="tag">Macros</span></div></div>
+        <div class="module-card fade-up"><div class="module-num">02</div><h3 class="module-title">Cycle & Hormones</h3><p class="module-desc">Guide des 4 phases hormonales avec alimentation et sport adaptés. Section périménopause incluse.</p><div class="tags"><span class="tag">4 phases</span><span class="tag">Périménopause</span><span class="tag">SPM</span></div></div>
+        <!-- PLACEHOLDER PHOTO — remplace par ta propre photo -->
+        <div class="module-photo fade-up"><img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800&q=80" alt="Assiette équilibrée riche en protéines et légumes"><span class="module-photo-tag">✦ Ton assiette type</span></div>
+        <div class="module-card fade-up"><div class="module-num">03</div><h3 class="module-title">9 Recettes Protéinées</h3><p class="module-desc">Macros détaillés, toggle 1 ou 4 portions, liées aux phases hormonales. Toutes en moins de 30 min.</p><div class="tags"><span class="tag">Macros détaillés</span><span class="tag">1 ou 4 portions</span></div></div>
+        <div class="module-card fade-up"><div class="module-num">04</div><h3 class="module-title">Tracker Persistant</h3><p class="module-desc">Données sauvegardées entre chaque session. Historique 7 jours, score quotidien, relances personnalisées.</p><div class="tags"><span class="tag">Persistant</span><span class="tag">Score quotidien</span></div></div>
+        <div class="module-card fade-up"><div class="module-num">05</div><h3 class="module-title">Liste de Courses</h3><p class="module-desc">Cochable par catégorie, quantités et budget estimé (~55–75€/semaine). Batch cooking du dimanche.</p><div class="tags"><span class="tag">Cochable</span><span class="tag">Budget inclus</span></div></div>
+        <div class="module-card featured fade-up"><div class="module-num">✦</div><h3 class="module-title">Sport selon le Cycle</h3><p class="module-desc">Le bon sport au bon moment. Fini la culpabilité de ne pas performer en phase menstruelle.</p><div class="tags"><span class="tag">Adapté au cycle</span><span class="tag">Tous niveaux</span></div></div>
+        <!-- PLACEHOLDER PHOTO — remplace par ta propre photo -->
+        <div class="module-photo fade-up"><img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&q=80" alt="Femme faisant des exercices de renforcement sur tapis"><span class="module-photo-tag">✦ À ton rythme</span></div>
       </div>
     </div>
-  </div>
-
-  <!-- PHOTOS — PLACEHOLDER : remplace par tes propres photos (repas, clientes, coaching) -->
-  <div class="photo-band">
-    <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800&q=80" alt="Assiette équilibrée riche en protéines et légumes">
-    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&q=80" alt="Femme faisant des exercices de renforcement sur tapis">
-    <img src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=800&q=80" alt="Légumes frais et ingrédients anti-inflammatoires">
   </div>
 
   <!-- RÉSULTATS -->
@@ -138,10 +154,10 @@
       <h2 class="section-h2 fade-up">Des résultats <em>mesurables</em></h2>
     </div>
     <div class="results-grid fade-up" style="max-width:1200px;margin:48px auto 0">
-      <div class="result-item"><span class="result-num">4</span><span class="result-label">semaines de programme<br>structuré et progressif</span></div>
-      <div class="result-item"><span class="result-num">~100g</span><span class="result-label">de protéines par jour<br>sans te forcer</span></div>
-      <div class="result-item"><span class="result-num">9</span><span class="result-label">recettes protéinées<br>avec macros détaillés</span></div>
-      <div class="result-item"><span class="result-num">100%</span><span class="result-label">données persistantes<br>accès à vie</span></div>
+      <div class="result-item"><span class="result-num" data-count="4">4</span><span class="result-label">semaines de programme<br>structuré et progressif</span></div>
+      <div class="result-item"><span class="result-num" data-count="100" data-prefix="~" data-suffix="g">~100g</span><span class="result-label">de protéines par jour<br>sans te forcer</span></div>
+      <div class="result-item"><span class="result-num" data-count="9">9</span><span class="result-label">recettes protéinées<br>avec macros détaillés</span></div>
+      <div class="result-item"><span class="result-num" data-count="100" data-suffix="%">100%</span><span class="result-label">données persistantes<br>accès à vie</span></div>
     </div>
   </div>
 
@@ -151,12 +167,13 @@
       <div><div class="section-label fade-up"><div class="section-label-line"></div><div class="section-label-text">Elles témoignent</div></div><h2 class="section-h2 fade-up">Ce qu'elles ont <em>vécu</em></h2></div>
       <p class="section-lead fade-up">Des femmes comme toi, entre 30 et 52 ans, qui avaient essayé d'autres méthodes sans résultats durables.</p>
     </div>
-    <div class="testi-scroll" style="max-width:1200px;margin:0 auto">
+    <div class="testi-scroll" id="testiScroll" style="max-width:1200px;margin:0 auto">
       <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">"Après 3 semaines, j'ai perdu <em>mes ballonnements chroniques</em> et mon énergie est revenue. Je n'avais pas réalisé l'impact de mes hormones."</p><div class="testi-author"><div class="testi-av"><img src="https://randomuser.me/api/portraits/women/47.jpg" alt=""></div><div><div class="testi-name">Sophie M.</div><div class="testi-detail">44 ans · Périménopause</div></div><div class="testi-badge">Vérifié</div></div></div>
       <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">"Le guide sur le cycle a tout changé. Je comprends enfin pourquoi je n'avais <em>aucune énergie</em> avant mes règles."</p><div class="testi-author"><div class="testi-av"><img src="https://randomuser.me/api/portraits/women/63.jpg" alt=""></div><div><div class="testi-name">Clara D.</div><div class="testi-detail">36 ans · Phase lutéale difficile</div></div><div class="testi-badge">Vérifié</div></div></div>
       <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">"J'ai enfin atteint <em>mes 100g de protéines</em> sans me faire violence. Le tracker me montre mes progrès réels chaque jour."</p><div class="testi-author"><div class="testi-av"><img src="https://randomuser.me/api/portraits/women/60.jpg" alt=""></div><div><div class="testi-name">Margaux L.</div><div class="testi-detail">39 ans · Sportive active</div></div><div class="testi-badge">Vérifié</div></div></div>
       <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">"Le tracker persistant est une révélation. Je peux enfin voir <em>ma progression semaine après semaine</em> sans tout perdre."</p><div class="testi-author"><div class="testi-av"><img src="https://randomuser.me/api/portraits/women/65.jpg" alt=""></div><div><div class="testi-name">Anne-Laure B.</div><div class="testi-detail">47 ans · Troubles du sommeil</div></div><div class="testi-badge">Vérifié</div></div></div>
     </div>
+    <div class="testi-hint fade-up" aria-hidden="true">← Fais glisser pour lire →</div>
   </div>
 
   <!-- PRICING -->
@@ -178,7 +195,7 @@
         <div class="pricing-badge">✦ Accès immédiat</div>
         <h3 class="pricing-title">Reset Métabolique<br>Programme Féminin 30–50 ans</h3>
         <p class="pricing-subtitle">Programme interactif complet avec tracker persistant et relances personnalisées.</p>
-        <div class="price-row"><span class="price-currency">€</span><span class="price-amount">87</span></div>
+        <div class="price-row"><span class="price-currency">€</span><span class="price-amount" data-count="87">87</span></div>
         <div class="price-old">au lieu de 147€ · Offre de lancement</div>
         <ul class="price-features">
           <li class="price-feature"><span>✓</span> 5 modules interactifs complets</li>
@@ -201,15 +218,17 @@
       <h2 class="section-h2 fade-up">Tu te poses <em>des questions ?</em></h2>
     </div>
     <div class="faq-layout">
-      <div class="faq-item fade-up"><button class="faq-question" onclick="toggleFaq(this)">C'est quoi exactement ? Un PDF ou une application ?<span class="faq-icon">+</span></button><div class="faq-answer">C'est un programme web interactif — tu te connectes avec ton email ou numéro, et tes données sont sauvegardées entre chaque session. Navigation fluide, tracker cliquable, recettes avec calcul de portions. Bien au-delà d'un PDF.</div></div>
-      <div class="faq-item fade-up"><button class="faq-question" onclick="toggleFaq(this)">Je suis en périménopause, est-ce fait pour moi ?<span class="faq-icon">+</span></button><div class="faq-answer">Absolument — c'est même l'une des cibles principales. Une section entière est dédiée à la périménopause avec les signes à reconnaître, comment adapter le programme quand les cycles deviennent irréguliers, et les nutriments prioritaires.</div></div>
-      <div class="faq-item fade-up"><button class="faq-question" onclick="toggleFaq(this)">Comment fonctionne le tracker persistant ?<span class="faq-icon">+</span></button><div class="faq-answer">Tu te connectes avec ton email ou ton numéro de téléphone. Chaque journée que tu remplis est sauvegardée automatiquement. Tu peux te déconnecter, changer d'appareil, revenir une semaine plus tard — toutes tes données sont là.</div></div>
-      <div class="faq-item fade-up"><button class="faq-question" onclick="toggleFaq(this)">Quelle différence avec un coaching individuel à 1800€ ?<span class="faq-icon">+</span></button><div class="faq-answer">Le programme est une base solide et autonome à 87€. Le coaching 1:1 va plus loin : personnalisation totale, suivi hebdomadaire, ajustements en temps réel. Beaucoup de clientes commencent par le programme, voient les premiers résultats, puis rejoignent le coaching pour aller encore plus loin.</div></div>
+      <div class="faq-item fade-up"><button class="faq-question" onclick="toggleFaq(this)">C'est quoi exactement ? Un PDF ou une application ?<span class="faq-icon">+</span></button><div class="faq-answer"><div class="faq-answer-inner">C'est un programme web interactif — tu te connectes avec ton email ou numéro, et tes données sont sauvegardées entre chaque session. Navigation fluide, tracker cliquable, recettes avec calcul de portions. Bien au-delà d'un PDF.</div></div></div>
+      <div class="faq-item fade-up"><button class="faq-question" onclick="toggleFaq(this)">Je suis en périménopause, est-ce fait pour moi ?<span class="faq-icon">+</span></button><div class="faq-answer"><div class="faq-answer-inner">Absolument — c'est même l'une des cibles principales. Une section entière est dédiée à la périménopause avec les signes à reconnaître, comment adapter le programme quand les cycles deviennent irréguliers, et les nutriments prioritaires.</div></div></div>
+      <div class="faq-item fade-up"><button class="faq-question" onclick="toggleFaq(this)">Comment fonctionne le tracker persistant ?<span class="faq-icon">+</span></button><div class="faq-answer"><div class="faq-answer-inner">Tu te connectes avec ton email ou ton numéro de téléphone. Chaque journée que tu remplis est sauvegardée automatiquement. Tu peux te déconnecter, changer d'appareil, revenir une semaine plus tard — toutes tes données sont là.</div></div></div>
+      <div class="faq-item fade-up"><button class="faq-question" onclick="toggleFaq(this)">Quelle différence avec un coaching individuel à 1800€ ?<span class="faq-icon">+</span></button><div class="faq-answer"><div class="faq-answer-inner">Le programme est une base solide et autonome à 87€. Le coaching 1:1 va plus loin : personnalisation totale, suivi hebdomadaire, ajustements en temps réel. Beaucoup de clientes commencent par le programme, voient les premiers résultats, puis rejoignent le coaching pour aller encore plus loin.</div></div></div>
     </div>
   </div>
 
   <!-- FINAL CTA -->
   <div class="final-cta-bg">
+    <div class="cta-blob cta-blob-1" aria-hidden="true"></div>
+    <div class="cta-blob cta-blob-2" aria-hidden="true"></div>
     <div class="final-eyebrow">✦ Le moment, c'est maintenant</div>
     <h2 class="final-h2">Ton corps mérite<br>d'être <em>compris.</em></h2>
     <p class="final-p">Pas un régime de plus. Un programme pensé pour ta biologie féminine, avec des résultats qui se voient dès la semaine 2.</p>

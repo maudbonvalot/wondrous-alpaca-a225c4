@@ -1858,3 +1858,26 @@
     }
     .meal-label { align-self: flex-start; }
   }
+/* ── PHOTOS RECETTES ── */
+.recette-img { overflow: hidden; }
+.recette-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+.recette-card:hover .recette-photo { transform: scale(1.05); }
+.modal-photo {
+  width: 100%;
+  height: 190px;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+.modal-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
